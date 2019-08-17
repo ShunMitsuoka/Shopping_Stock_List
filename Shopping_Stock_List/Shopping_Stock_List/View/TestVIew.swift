@@ -17,6 +17,20 @@ class TestVIew: UIViewController {
     }
     
 
+    @IBOutlet weak var NameTF: UITextField!
+    
+    @IBOutlet weak var CategoryTF: UITextField!
+    
+    @IBOutlet weak var NumberTF: UITextField!
+    
+    
+    @IBAction func complete(_ sender: Any) {
+        let appendData:ShoppingDataClass = ShoppingDataClass(Name: NameTF.text!, Category: "", Number: 1, Image: "", Memo: "")
+        print(appendData.Name)
+        ListArrayClass.appendData(appendData: appendData)
+        
+    }
+    
     /*
     // MARK: - Navigation
 

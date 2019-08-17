@@ -14,6 +14,7 @@ class MyUITabBarController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tabBar.barTintColor = ViewProperties.backgroundColor
     }
     
 

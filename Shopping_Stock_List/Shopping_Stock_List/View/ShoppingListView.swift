@@ -8,14 +8,34 @@
 
 import UIKit
 
-class ShoppingListView: UIViewController {
+class ShoppingListView: SuperViewController_List {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("ShoppingList画面が再表示されました。")
+        ListArray = ListArrayClass.ShoppingListArray
+        tableView.reloadData()
     }
     
+    var ListArray:[ShoppingDataClass] = []
+    
+    //cellの表示設定
+    override func CellView(indexpathRow:Int) -> UIView {
+        let cellName = ListArray[indexpathRow].Name
+        let cell_view:UIView = ViewProperties.stockCellView(name: cellName, date: "2019/08/15")
+        return cell_view
+    }
+    //section内のcell数
+    override func numberOfRowsInSection() -> Int {
+        return ListArray.count
+    }
+    
+    //データ削除
+    override func deleteData(indexpath:IndexPath){
+        ListArray.remove(at: indexpath.row)
+        tableView.deleteRows(at: [indexpath], with: .bottom)
+        SaveDataClass.SaveData(inputData: ListArray, KeyName: "ShoppingData")
+    }
 
     /*
     // MARK: - Navigation

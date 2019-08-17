@@ -9,5 +9,11 @@
 import Foundation
 
 class CategoryClass {
-    var CategoryArray_fundamental:Array = [""]
+    let CategoryArray_fundamental:Array<String> = ["aaa"]
+    static var CategoryArray:Array<String>{
+        get {
+            let categoryArray = SaveDataClass.LoadData(KeyName: "CategoryData")
+            return categoryArray as! Array<String>
+        }
+    }
 }

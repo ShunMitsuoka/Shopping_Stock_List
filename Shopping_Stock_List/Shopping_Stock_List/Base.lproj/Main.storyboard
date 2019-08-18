@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rPR-XK-B4I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1A0-jd-6e5">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -109,23 +109,76 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xn-dR-XKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-475.36231884057975" y="405.80357142857139"/>
+            <point key="canvasLocation" x="1646" y="-300"/>
         </scene>
-        <!--MyUI Navigation Controller-->
-        <scene sceneID="bGA-z7-8xW">
+        <!--追加-->
+        <scene sceneID="l1u-7G-bsP">
             <objects>
-                <navigationController id="rPR-XK-B4I" customClass="MyUINavigationController" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="M3c-KO-bQA">
+                <viewController id="rwg-k5-U8c" customClass="add_StockListView" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6EM-UG-ThJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="j79-ne-BEu"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="追加" id="cwH-8G-URv"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkF-25-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1645" y="518"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="ydV-Bt-x2U">
+            <objects>
+                <navigationController id="Yfs-hx-Tdq" customClass="MyUINavigationController" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="UMy-Xh-74a"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FSA-fZ-dCo">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="1A0-jd-6e5" kind="relationship" relationship="rootViewController" id="txQ-Tv-jeL"/>
+                        <segue destination="78g-Fo-UYC" kind="relationship" relationship="rootViewController" id="RkR-qN-l1S"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g94-Bm-JMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfY-3O-oqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2210" y="82"/>
+            <point key="canvasLocation" x="-458" y="518"/>
+        </scene>
+        <!--Stock-->
+        <scene sceneID="U6r-ge-LP5">
+            <objects>
+                <viewController id="78g-Fo-UYC" customClass="StockListView" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xMX-fe-R59">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qk7-b7-YId"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Stock" prompt=" " id="g1g-AV-opn"/>
+                    <connections>
+                        <segue destination="rwg-k5-U8c" kind="show" identifier="fromStockToAdd" id="oxX-1u-zmw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="INN-Zb-mZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="586" y="518"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="E5q-cp-vad">
+            <objects>
+                <navigationController id="B1u-Rh-pow" customClass="MyUINavigationController" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="UoF-J4-4xx"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UwB-93-Yal">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="CXg-gh-7yZ" kind="relationship" relationship="rootViewController" id="POS-aw-bg5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Snr-gG-TVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-459" y="-300"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="QnS-Pu-kXi">
@@ -151,10 +204,14 @@
                         <viewLayoutGuide key="safeArea" id="H5H-4l-GQ1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="yhx-ZQ-qHR"/>
+                    <navigationItem key="navigationItem" id="GZi-Aa-oQA"/>
+                    <connections>
+                        <segue destination="8Jt-N3-LZ6" kind="show" id="6Vw-Sg-lrv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1q6-Cj-ZcX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-475.36231884057975" y="-323.4375"/>
+            <point key="canvasLocation" x="586" y="-300"/>
         </scene>
         <!--MyUI Tab Bar Controller-->
         <scene sceneID="HI1-IE-iYM">
@@ -167,13 +224,13 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="CXg-gh-7yZ" kind="relationship" relationship="viewControllers" id="PtT-3L-L26"/>
-                        <segue destination="8Jt-N3-LZ6" kind="relationship" relationship="viewControllers" id="a0g-QY-sXz"/>
+                        <segue destination="B1u-Rh-pow" kind="relationship" relationship="viewControllers" id="pJ4-WD-pIz"/>
+                        <segue destination="Yfs-hx-Tdq" kind="relationship" relationship="viewControllers" id="cz0-Se-xbS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VyI-3M-VdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1395" y="82"/>
+            <point key="canvasLocation" x="-2412" y="99"/>
         </scene>
     </scenes>
 </document>

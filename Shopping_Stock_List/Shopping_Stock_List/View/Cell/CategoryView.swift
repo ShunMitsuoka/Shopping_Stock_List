@@ -16,13 +16,12 @@ class CategoryView: UIView {
         super.init(frame: frame)
         self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width*0.6, height: ViewProperties.cellHeight*3)
         self.backgroundColor = UIColor.white
-        collectionView.backgroundColor = UIColor.gray
+        collectionView.backgroundColor = UIColor(red: 225/255, green: 200/255, blue: 168/255, alpha: 1)
         
         //delegate
         collectionView.delegate = self
         collectionView.dataSource = self
         //cellectionView設定
-        let cellWidth:CGFloat = (ViewProperties.mainBoundSize.width*0.6 - 40)/3
         flowLayout.itemSize = CGSize(width: cellWidth , height: cellWidth)
         flowLayout.minimumInteritemSpacing = 10
         flowLayout.minimumLineSpacing = 10
@@ -35,8 +34,19 @@ class CategoryView: UIView {
         self.addSubview(collectionView)
     }
     
+    //cellの大きさ
+    let cellWidth:CGFloat = (ViewProperties.mainBoundSize.width*0.6 - 40)/3
+    //cellの色
+    let cellColor:UIColor = UIColor(red: 127/255, green: 175/255, blue: 177/255, alpha: 1)
+    let selectedColor:UIColor = UIColor(red: 225/255, green: 178/255, blue: 59/255, alpha: 1)
+    
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
     let flowLayout = UICollectionViewFlowLayout()
+    var category:String = "others"
+    // new = 0
+    // detail = 1
+    var identfierID:Int = 0
+    var setCategoryName:String!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -46,18 +56,53 @@ class CategoryView: UIView {
 
 extension CategoryView:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return CategoryClass.CategoryArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
-        cell.backgroundColor = UIColor.red
-        return cell
+        
+        cell.backgroundColor = cellColor
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellWidth))
+        label.textAlignment = .center
+        label.textColor = UIColor.white
+        label.text = CategoryClass.CategoryArray[indexPath.row]
+        
+        cell.addSubview(label)
+        
+        
+        if identfierID == 0{
+            if indexPath.row == CategoryClass.CategoryArray.count - 1 {
+                cell.backgroundColor = selectedColor
+            }
+            return cell
+        } else if identfierID == 1{
+            //Details画面での設定用
+            if indexPath.row == CategoryClass.CategoryIndex(categoryName: self.setCategoryName){
+                cell.backgroundColor = selectedColor
+            }
+            return cell
+        }
+        fatalError()
+        
     }
     
     
 }
 
 extension CategoryView: UICollectionViewDelegate{
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let all = collectionView.visibleCells
+        for cell in all{
+            cell.backgroundColor = cellColor
+        }
+        if let selectedCell = collectionView.cellForItem(at: indexPath){
+            selectedCell.backgroundColor = selectedColor
+            category = CategoryClass.CategoryArray[indexPath.row]
+        }
+    }
     
 }

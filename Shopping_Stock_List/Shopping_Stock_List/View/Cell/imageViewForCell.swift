@@ -16,6 +16,8 @@ class imageViewForCell: UIView {
         self.backgroundColor = UIColor.white
     }
     
+    var image:UIImage?
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

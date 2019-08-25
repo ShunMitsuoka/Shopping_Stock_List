@@ -22,25 +22,24 @@ class DeletedDataClass : Codable {
         self.Category = category
     }
     
-    var Number:Double
+    var Number:Double?
     func Cgange_Number(number:Double){
         self.Number = number
     }
     
-    var Image:String
+    var Image:String?
     func Change_Image(image:String){
         self.Image = image
     }
     
-    init(Name:String,Category:String,Number:Double,Image:String?) {
+    init(Name:String,Category:String?,Number:Double?,Image:String?) {
+        //nilだった場合の処理
+        //Number = -9999
+        //Image = ""
         self.Name = Name
-        self.Category = Category
-        self.Number = Number
-        if let image = Image{
-            self.Image = image
-        }else{
-            self.Image = ""
-        }
+        self.Category = Category ?? CategoryClass.CategoryArray.last!
+        self.Number = Number ?? -9999
+        self.Image = Image ?? ""
     }
     
 }
@@ -51,11 +50,7 @@ class ShoppingDataClass : DeletedDataClass {
     var Memo:String?
     
     func Change_Memo(memo:String?){
-        guard memo != nil else {
-            self.Memo = ""
-            return
-        }
-        self.Memo = memo
+        self.Memo = memo ?? ""
     }
     
     enum ShoppingCodingKeys : String, CodingKey{
@@ -66,13 +61,11 @@ class ShoppingDataClass : DeletedDataClass {
         case Memo
     }
     
-    init(Name:String,Category:String,Number:Double,Image:String?,Memo:String?) {
-        if let memo = Memo {
-            self.Memo = memo
-        } else {
-            self.Memo = ""
-        }
+    init(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?) {
         super.init(Name: Name, Category: Category, Number: Number, Image: Image)
+        //値の代入とnilだった場合の処理
+        //Memo = ""
+        self.Memo = Memo ?? ""
     }
     
     required init(from decoder: Decoder) throws {
@@ -100,9 +93,9 @@ class ShoppingDataClass : DeletedDataClass {
 //ストックデータクラス
 class StockDataClass : ShoppingDataClass{
     
-    var ExpDate:Date?
-    func Change_Date(date:Date!){
-        self.ExpDate = date
+    var ExpDate:String?
+    func Change_Date(date:String?){
+        self.ExpDate = date ?? "nil"
     }
     
     var Amount:Double?
@@ -120,15 +113,18 @@ class StockDataClass : ShoppingDataClass{
         case Amount
     }
     
-    init(Name:String,Category:String,Number:Double,Image:String?,Memo:String?,ExpDate:Date?,Amount:Double?) {
-        self.ExpDate = ExpDate
-        self.Amount = Amount
+    init(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?,ExpDate:String?,Amount:Double?) {
         super.init(Name: Name, Category: Category, Number: Number, Image: Image, Memo: Memo)
+        //値の代入とnilだった場合の処理
+        //ExpDate = "nil"
+        //Amount = -999
+        self.ExpDate = ExpDate ?? "nil"
+        self.Amount = Amount ?? -999
     }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: StockCodingKeys.self)
-        self.ExpDate = try values.decode(Date.self, forKey: .ExpDate)
+        self.ExpDate = try values.decode(String.self, forKey: .ExpDate)
         self.Amount = try values.decode(Double.self, forKey: .Amount)
         let name = try values.decode(String.self, forKey: .Name)
         let category = try values.decode(String.self, forKey: .Category)

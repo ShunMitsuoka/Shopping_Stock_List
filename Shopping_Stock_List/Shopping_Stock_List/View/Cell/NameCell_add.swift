@@ -26,6 +26,11 @@ class NameCell_add: SuperNameCell,UITextFieldDelegate {
         textField.font = UIFont.systemFont(ofSize:ViewProperties.mainBoundSize.width*0.6/8 )
         textField.borderStyle = .none
         textField.textAlignment = NSTextAlignment.center
+        
+        //完了ボタンの作成
+        let toolbar_Done = ViewProperties.setToolbar_Done(view:self, action: #selector(done_Date))
+        textField.inputAccessoryView = toolbar_Done
+        
         self.addSubview(textField)
     }
     
@@ -34,6 +39,11 @@ class NameCell_add: SuperNameCell,UITextFieldDelegate {
     }
     
     let textField = UITextField()
+    
+    //    textFieldのdoneボタンの動き
+    @objc func done_Date() {
+        textField.endEditing(true)
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textField.endEditing(true)

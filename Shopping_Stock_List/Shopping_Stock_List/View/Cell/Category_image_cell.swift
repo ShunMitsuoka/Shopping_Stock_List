@@ -23,10 +23,17 @@ class Category_Image_cell: UITableViewCell {
         //categoryView追加
         
         //imageview追加
-        self.addSubview(imageViewForCell())
-        self.addSubview(CategoryView())
+        categoryView = CategoryView()
+        imageview = imageViewForCell()
+        self.addSubview(imageview!)
+        self.addSubview(categoryView!)
+        
+        self.selectionStyle = .none
         
     }
+    
+    var categoryView:CategoryView?
+    var imageview:imageViewForCell?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -121,11 +121,53 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="j79-ne-BEu"/>
                     </view>
-                    <navigationItem key="navigationItem" title="追加" id="cwH-8G-URv"/>
+                    <navigationItem key="navigationItem" title="追加" id="cwH-8G-URv">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="KaY-Ns-Jyc">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z5Q-5t-qFD">
+                                <rect key="frame" x="302" y="2.5" width="92" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="追加"/>
+                                <connections>
+                                    <segue destination="v6S-sY-oZm" kind="unwind" identifier="unwind_fromStockToAdd" unwindAction="unwindPrevFor:towards:" id="W8T-SB-ZC2"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkF-25-TOf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="v6S-sY-oZm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1645" y="518"/>
+        </scene>
+        <!--詳細-->
+        <scene sceneID="JEv-Hl-M43">
+            <objects>
+                <viewController storyboardIdentifier="StockListDetails" id="lie-yt-LBO" customClass="StockListDetails" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nk9-eG-QwY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="tpy-I9-dN5"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="詳細" id="buf-uO-gx9">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="1tK-Se-S2L">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wxD-Jv-TEd">
+                                <rect key="frame" x="302" y="2.5" width="92" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="保存"/>
+                                <connections>
+                                    <segue destination="dTc-CN-eU8" kind="unwind" identifier="unwind_fromDetailsToAdd" unwindAction="unwindPrevFor:towards:" id="Cfx-Pu-5RO"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OFm-Kx-pYU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dTc-CN-eU8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1645" y="1246"/>
         </scene>
         <!--Item-->
         <scene sceneID="ydV-Bt-x2U">
@@ -154,9 +196,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qk7-b7-YId"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Stock" prompt=" " id="g1g-AV-opn"/>
+                    <navigationItem key="navigationItem" title="Stock" id="hOH-jg-w2x"/>
                     <connections>
                         <segue destination="rwg-k5-U8c" kind="show" identifier="fromStockToAdd" id="oxX-1u-zmw"/>
+                        <segue destination="lie-yt-LBO" kind="show" identifier="fromStockToDetail" id="3v7-6w-J0z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INN-Zb-mZE" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -17,6 +17,10 @@ class MyUITabBarController: UITabBarController {
         tabBar.barTintColor = ViewProperties.backgroundColor
     }
     
+    func tabBarHeight() -> CGFloat{
+        return self.tabBar.frame.size.height
+    }
+
 
     /*
     // MARK: - Navigation

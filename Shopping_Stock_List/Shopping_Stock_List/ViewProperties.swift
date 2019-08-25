@@ -18,8 +18,8 @@ class ViewProperties {
     
     //背景色
     static let backgroundColor:UIColor = UIColor.init(red: 127/255, green: 175/255, blue: 177/255, alpha: 1)
-    static let tableViewbackgroundColor = UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
-    
+    static let tableViewbackgroundColor = UIColor(red: 230/255, green: 217/255, blue: 205/255, alpha: 1)
+//        UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
     //Cellの色
     static func CellColor(indexpath:Int) -> UIColor?{
         switch indexpath % 2{
@@ -44,26 +44,6 @@ class ViewProperties {
     }
     
     //内容表示
-    static func stockCellView(name:String, date:String) -> UIView{
-        let cellView = UIView(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width, height: cellHeight))
-        cellView.backgroundColor = UIColor.clear
-        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width*0.6, height: cellHeight))
-        nameLabel.text = name
-        nameLabel.textColor = UIColor.black
-        nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.6/6)
-        nameLabel.textAlignment = NSTextAlignment.center
-        let dateLabel = UILabel(frame: CGRect(x: mainBoundSize.width*0.6, y:0 , width: mainBoundSize.width*0.4, height: cellHeight))
-//        dateLabel.backgroundColor = UIColor.red
-        dateLabel.text = date
-        dateLabel.textColor = UIColor.black
-        dateLabel.textAlignment = NSTextAlignment.center
-        dateLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.4/6 )
-        cellView.addSubview(nameLabel)
-        cellView.addSubview(dateLabel)
-        //残量バー
-        cellView.layer.addSublayer(gradientLayer())
-        return cellView
-    }
     
     //header情報
     static func headerView(section:Int) -> UIView{
@@ -83,16 +63,45 @@ class ViewProperties {
     }
     
     //グラデーション設定
-    static func gradientLayer() -> CALayer{
+    static func gradientLayer(frame:CGRect) -> CALayer{
         let gradientLayer = CAGradientLayer()
         let startColor = UIColor(red: 215/255, green: 66/255, blue: 96/255, alpha: 1).cgColor
         let secondColor = UIColor(red: 225/255, green: 178/255, blue: 59/255, alpha: 1).cgColor
         let endColor = UIColor(red: 68/255, green: 157/255, blue: 155/255, alpha: 1).cgColor
         gradientLayer.colors = [startColor,secondColor,endColor]
-        gradientLayer.frame = CGRect(x: 0, y:ViewProperties.cellHeight*0.93 , width: ViewProperties.mainBoundSize.width, height: ViewProperties.cellHeight*0.07)
+        gradientLayer.frame = frame
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
         return gradientLayer
+    }
+    
+    //完了ボタンの作成
+    static func setToolbar_Done(view:UIView, action: Selector?) -> UIToolbar{
+        let toolbar_Done = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: view, action: nil)
+        let doneItem_Date = UIBarButtonItem(barButtonSystemItem: .done, target: view, action: action)
+        toolbar_Done.setItems([spacelItem, doneItem_Date], animated: true)
+        return toolbar_Done
+    }
+    //Date用完了ボタンの作成
+    static func setToolbar_Done_ForDate(view:UIView, doneAction: Selector?,cancelAction: Selector?) -> UIToolbar{
+        let toolbar_Done = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        let CancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: view, action: cancelAction)
+        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: view, action: nil)
+        let doneItem_Date = UIBarButtonItem(barButtonSystemItem: .done, target: view, action: doneAction)
+        toolbar_Done.setItems([CancelItem, spacelItem, doneItem_Date], animated: true)
+        return toolbar_Done
+    }
+    
+    
+    //日付の設定
+    static func DateFormmat(date:Date) -> String{
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.timeZone = NSTimeZone.local
+        return formatter.string(from: date)
     }
     
     

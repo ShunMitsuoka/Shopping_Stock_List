@@ -61,7 +61,7 @@ class SaveDataClass{
     }
     
     static func LoadData(KeyName:String) -> Array<Any>{
-        print("\(KeyName)のデータをロードします。")
+//        print("\(KeyName)のデータをロードします。")
         switch KeyName {
         case UserDafaultsKey.ShoppingData.rawValue:
             if let LoadData = UserDefaults.standard.data(forKey: KeyName){
@@ -93,6 +93,14 @@ class SaveDataClass{
         }
         print("\(KeyName)のデータが存在しません。")
         return []
+    }
+    
+    //データ追加
+    static func add_StockData(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?,ExpDate:String?,Amount:Double?){
+        let data:StockDataClass = StockDataClass(Name: Name, Category: Category, Number: Number, Image: Image, Memo: Memo, ExpDate: ExpDate, Amount: Amount)
+        var ArrayData = LoadData(KeyName: UserDafaultsKey.StockData.rawValue) as! Array<StockDataClass>
+        ArrayData.append(data)
+        SaveData(inputData: ArrayData, KeyName: UserDafaultsKey.StockData.rawValue)
     }
     
 }

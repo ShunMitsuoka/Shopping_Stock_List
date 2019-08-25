@@ -31,15 +31,12 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
         //ピッカー設定
         datePicker.locale = Locale(identifier: "ja_JP")
         datePicker.datePickerMode = UIDatePicker.Mode.date
-        //完了ボタンの作成
-        let toolbar_Date = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 44))
-        let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let doneItem_Date = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done_Date))
-        toolbar_Date.setItems([spacelItem, doneItem_Date], animated: true)
-        
+        datePicker.addTarget(self, action: #selector(self.didDatePickerValueChanged(_:)), for: UIControl.Event.valueChanged)
         DateField.inputView = datePicker
-        DateField.inputAccessoryView = toolbar_Date
-        
+        //完了ボタンの作成
+        let toolbar_Done = ViewProperties.setToolbar_Done_ForDate(view:self, doneAction: #selector(done_Date),cancelAction: #selector(cancel_Date))
+        DateField.inputAccessoryView = toolbar_Done
+
         self.addSubview(DateField)
     }
     
@@ -49,23 +46,37 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
     
     let DateField = UITextField()
     let datePicker = UIDatePicker()
+    var date:String?
     
     //    DatePickerのdoneボタンの動き
     @objc func done_Date() {
         DateField.endEditing(true)
-        // 日付のフォーマット
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        formatter.locale = Locale(identifier: "ja_JP")
-        formatter.timeZone = NSTimeZone.local
-        DateField.text = "\(formatter.string(from: datePicker.date))"
+        // 日付の入力
+        DateField.text = ViewProperties.DateFormmat(date: datePicker.date)
+        date = ViewProperties.DateFormmat(date: datePicker.date)
+    }
+    
+    
+    //    DatePickerのcancelボタンの動き
+    @objc func cancel_Date() {
+        DateField.endEditing(true)
+        // 日付の入力
+        DateField.text = ""
+        date = "nil"
+    }
+    
+    //DatePickerの値が変化した際の動き
+    @objc func didDatePickerValueChanged(_ sender : UIDatePicker){
+        DateField.text = ViewProperties.DateFormmat(date: datePicker.date)
+        date = ViewProperties.DateFormmat(date: datePicker.date)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        date = ViewProperties.DateFormmat(date: datePicker.date)
         // Configure the view for the selected state
     }
+    
+    
 
 }

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  Shopping_Stock_List
+
+  Created by 光岡駿 on 2019/08/25.
+  Copyright © 2019 光岡駿. All rights reserved.
+*/
+
+
+"VC100_Name" = "Food name is blank";

@@ -16,9 +16,11 @@ class StockListView: SuperViewController_List {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        addButton.frame = CGRect(x: 0,y: 0 , width: 90, height: 90)
-        addButton.layer.position = CGPoint(x: ViewProperties.mainBoundSize.width - 30, y: ViewProperties.mainBoundSize.height - tabBarHeight - 30)
+        addButton.frame = CGRect(x: 0,y: 0 , width: 50, height: 50)
+        addButton.layer.position = CGPoint(x: ViewProperties.mainBoundSize.width - 50, y: ViewProperties.mainBoundSize.height - tabBarHeight - 40)
         addButton.addTarget(self, action: #selector(buttonEvent(_:)), for: UIControl.Event.touchUpInside)
+        addButton.setImage(UIImage(named: "add_btn"), for: .normal)
+        addButton.imageView?.contentMode = .scaleAspectFit
         self.view.addSubview(addButton)
         
     }
@@ -31,7 +33,7 @@ class StockListView: SuperViewController_List {
     
     var ListArray:[StockDataClass] = []
     var ListArray_category:[[StockDataClass]] = [[]]
-    var addButton = UIButton(type: .contactAdd)
+    var addButton = UIButton(type: .custom)
     var receive_indexPath:IndexPath?
     var receive_data:StockDataClass?
     
@@ -52,9 +54,8 @@ class StockListView: SuperViewController_List {
     override func deleteData(indexpath:IndexPath){
         ListArray_category[indexpath.section].remove(at: indexpath.row)
         tableView.deleteRows(at: [indexpath], with: .bottom)
-        ListArray = Array_order_return(Array: ListArray_category)
+        ListArray = Array_order_return(Array: ListArray_category) as! [StockDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "StockData")
-        
     }
     
 //    //データの整理
@@ -95,10 +96,10 @@ class StockListView: SuperViewController_List {
         switch unwindSegue.identifier {
         case "unwind_fromStockToAdd":
             print("unwind")
-        case "unwind_fromDetailsToAdd":
+        case "unwind_fromStockToDetail":
             if let data = receive_data{
                 if let indexPath = receive_indexPath{
-                    ListArray_category = Array_order(ListArray: ListArrayClass.StockListArray)
+                    ListArray_category = Array_order(ListArray: ListArrayClass.StockListArray) as! [[StockDataClass]]
                     //カテゴリーに変更があったか確認
                     //無ければ同じ場所に、あればそのカテゴリーの最後に要素を追加
                     if CategoryClass.CategoryArray[indexPath.section] == data.Category{
@@ -108,7 +109,7 @@ class StockListView: SuperViewController_List {
                         let add_indexPath = CategoryClass.CategoryIndex(categoryName: data.Category)
                         ListArray_category[add_indexPath].append(data)
                     }
-                    ListArray = Array_order_return(Array: ListArray_category)
+                    ListArray = Array_order_return(Array: ListArray_category) as! [StockDataClass]
                     SaveDataClass.SaveData(inputData: ListArray, KeyName: "StockData")
                     tableView.reloadData()
                 }
@@ -119,15 +120,16 @@ class StockListView: SuperViewController_List {
         }
     }
     
-    //reload設定
+    //tableVIew reload設定
+    //データの読み込みなど
     override func customReloadData(){
-        ListArray_category = Array_order(ListArray: ListArrayClass.StockListArray)
-        ListArray = Array_order_return(Array: ListArray_category)
+        ListArray_category = Array_order(ListArray: ListArrayClass.StockListArray) as! [[StockDataClass]]
+        ListArray = Array_order_return(Array: ListArray_category) as! [StockDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "StockData")
         tableView.reloadData()
     }
     
-    //cell選択時
+    //cell選択時segue
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data:StockDataClass = ListArray_category[indexPath.section][indexPath.row]
         let cell = tableView.cellForRow(at: indexPath)
@@ -135,7 +137,6 @@ class StockListView: SuperViewController_List {
             performSegue(withIdentifier: "fromStockToDetail", sender: (data,indexPath))
         }
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     /*

@@ -46,9 +46,10 @@ class add_StockListView: SuperVC_StockDetails {
     
     //遷移する際の動作
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if segue.identifier == "unwind_fromStockToAdd"{
             print("データを追加します。")
-            SaveDataClass.add_StockData(Name: name, Category: category, Number: number, Image: "", Memo: memo, ExpDate: expDate, Amount: amount)
+            SaveDataClass.add_StockData(Name: name, Category: category, Number: number, Image: image, Memo: memo, ExpDate: expDate, Amount: amount)
         }
     }
     

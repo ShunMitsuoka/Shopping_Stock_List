@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "StockListDetails.tableView(_:cellForRowAt:):StockListDetails.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "receiveData.Image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static SaveDataClass.add_StockData(Name:Category:Number:Image:Memo:ExpDate:Amount:):SaveData.swift">
+      </ContextState>
+      <ContextState
+         contextName = "StockDataClass.encode(to:):Data.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

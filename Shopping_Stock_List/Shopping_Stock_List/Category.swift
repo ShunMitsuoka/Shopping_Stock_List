@@ -17,7 +17,7 @@ class CategoryClass {
         }
     }
     
-    //CategoryNameに対応するCategoryArrayのいIndexPath.rowを返す。
+    //CategoryNameに対応するCategoryArrayのIndexPath.rowを返す。
     static func CategoryIndex(categoryName:String) -> Int{
         if let indexPathRow = CategoryArray.firstIndex(of: categoryName){
             return indexPathRow

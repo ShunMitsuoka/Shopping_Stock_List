@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SuperVC_StockDetails: SuperViewController_Details {
+class SuperVC_StockDetails: SuperViewController_Details,segueDelegate  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,7 @@ class SuperVC_StockDetails: SuperViewController_Details {
                 return self.expDateCell!
             case 2:
                 self.category_image_Cell = (tableView.dequeueReusableCell(withIdentifier: "Cate_Img_Cell") as! Category_Image_cell)
+                self.category_image_Cell?.imageview?.setImageOnSelf(image: UIImage(named: "no_Image")!)
                 return self.category_image_Cell!
             case 3:
                 self.numberCell = (tableView.dequeueReusableCell(withIdentifier: "NumberCell") as! NumberCell)
@@ -88,7 +89,7 @@ class SuperVC_StockDetails: SuperViewController_Details {
         switch indexPath.section {
         case 0:
             if indexPath.row == 2{
-                return ViewProperties.cellHeight*3
+                return ViewProperties.imageCellHeight
             }else{
                 return ViewProperties.cellHeight
             }
@@ -113,6 +114,57 @@ class SuperVC_StockDetails: SuperViewController_Details {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
+    }
+    
+    ///segueDelegateプロトコル
+    func segueDelegate() {
+        print("segueDelegateが呼ばれました")
+        if let currentVC = ViewProperties.getTopViewController(){
+            switch currentVC{
+            case is ShoppingListDetails:
+                performSegue(withIdentifier: "fromShoppingDetailsToCamera", sender: nil)
+            case is StockListDetails:
+                performSegue(withIdentifier: "fromStockDetailsToCamera", sender: nil)
+            case is add_ShoppingListView:
+                performSegue(withIdentifier: "fromShoppingAddToCamera", sender: nil)
+            case is add_StockListView:
+                performSegue(withIdentifier: "fromStockAddToCamera", sender: nil)
+            default:
+                return
+            }
+        }
+    }
+    
+    //カメラ画面に遷移する際の動作
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "fromShoppingDetailsToCamera"{
+            let CameraVC = segue.destination as! CameraVC
+            CameraVC.imageViewCell_frame = self.category_image_Cell?.imageview?.frame
+        }else
+        if segue.identifier == "fromStockDetailsToCamera"{
+            let CameraVC = segue.destination as! CameraVC
+            CameraVC.imageViewCell_frame = self.category_image_Cell?.imageview?.frame
+        }else
+        if segue.identifier == "fromShoppingAddToCamera"{
+            let CameraVC = segue.destination as! CameraVC
+            CameraVC.imageViewCell_frame = self.category_image_Cell?.imageview?.frame
+        }else
+        if segue.identifier == "fromStockAddToCamera"{
+            let CameraVC = segue.destination as! CameraVC
+            CameraVC.imageViewCell_frame = self.category_image_Cell?.imageview?.frame
+        }
+    }
+    
+    //カメラ画面からのunwind設定
+    @IBAction func unwindPrev(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        switch unwindSegue.identifier {
+        case "unwind_fromCameraVC_save":
+            print("save_unwind")
+        case "unwind_fromCameraVC_cancel":
+            print("cancel_unwind")
+        default:
+            fatalError()
+        }
     }
     
 }

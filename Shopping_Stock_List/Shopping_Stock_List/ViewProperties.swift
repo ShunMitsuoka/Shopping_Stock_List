@@ -42,6 +42,7 @@ class ViewProperties {
             return cellheight
         }
     }
+    static var imageCellHeight:CGFloat = ViewProperties.cellHeight*3
     
     //内容表示
     
@@ -104,5 +105,20 @@ class ViewProperties {
         return formatter.string(from: date)
     }
     
+    ///現在表示されているViewControllerを取得
+    static func getTopViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController {
+            return ViewProperties.getTopViewController(controller: navigationController.visibleViewController)
+        }
+        if let tabController = controller as? UITabBarController {
+            if let selected = tabController.selectedViewController {
+                return ViewProperties.getTopViewController(controller: selected)
+            }
+        }
+        if let presented = controller?.presentedViewController {
+            return ViewProperties.getTopViewController(controller: presented)
+        }
+        return controller
+    }
     
 }

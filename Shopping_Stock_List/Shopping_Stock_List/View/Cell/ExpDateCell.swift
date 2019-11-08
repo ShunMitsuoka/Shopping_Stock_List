@@ -38,6 +38,7 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
         DateField.inputAccessoryView = toolbar_Done
 
         self.addSubview(DateField)
+        self.date = nil
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -62,7 +63,7 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
         DateField.endEditing(true)
         // 日付の入力
         DateField.text = ""
-        date = "nil"
+        date = nil
     }
     
     //DatePickerの値が変化した際の動き
@@ -73,7 +74,6 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        date = ViewProperties.DateFormmat(date: datePicker.date)
         // Configure the view for the selected state
     }
     

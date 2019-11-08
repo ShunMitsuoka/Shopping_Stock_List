@@ -67,9 +67,34 @@ class SuperViewController_List: SuperViewController {
     func deleteData(indexpath:IndexPath){}
     
     
-    //Stock
+    ///ShoppingList
+    ///Cellの内容表示
+    func shoppingCellView(name:String, number:Double?) -> UIView{
+        let cellView = UIView(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width, height: cellHeight))
+        cellView.backgroundColor = UIColor.clear
+        ///NameLabe作成
+        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width*0.5, height: cellHeight))
+        nameLabel.text = name
+        nameLabel.textColor = UIColor.black
+        nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/6)
+        nameLabel.textAlignment = NSTextAlignment.center
+        cellView.addSubview(nameLabel)
+        ///NumberLabe作成
+        if let number_ = number{
+            if number_ != -9999{
+                let numberLabel = UILabel(frame: CGRect(x: mainBoundSize.width*0.5, y: 0, width: mainBoundSize.width*0.5, height: cellHeight))
+                numberLabel.text = String(number_)
+                numberLabel.textColor = UIColor.black
+                numberLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/6)
+                numberLabel.textAlignment = NSTextAlignment.center
+                cellView.addSubview(numberLabel)
+            }
+        }
+        return cellView
+    }
     
-    //内容表示
+    ///StockList
+    ///Cellの内容表示
     func stockCellView(name:String, date:String?,amount:Double?) -> UIView{
         let cellView = UIView(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width, height: cellHeight))
         cellView.backgroundColor = UIColor.clear
@@ -79,7 +104,7 @@ class SuperViewController_List: SuperViewController {
         nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/6)
         nameLabel.textAlignment = NSTextAlignment.center
         cellView.addSubview(nameLabel)
-        if date != "nil" {
+        if let date = date {
             let dateLabel = UILabel(frame: CGRect(x: mainBoundSize.width*0.5, y:0 , width: mainBoundSize.width*0.5, height: cellHeight))
             dateLabel.text = date
             dateLabel.textColor = UIColor.black
@@ -89,7 +114,7 @@ class SuperViewController_List: SuperViewController {
         }
         
         //残量バーを表示しない
-        if amount == -999 || amount == nil {
+        if amount == nil {
             let layer:CALayer =  CALayer()
             layer.frame = CGRect(x: 0, y: cellHeight*0.93 , width: mainBoundSize.width, height: cellHeight*0.07)
             layer.backgroundColor = UIColor(red: 68/255, green: 157/255, blue: 155/255, alpha: 1).cgColor
@@ -97,19 +122,20 @@ class SuperViewController_List: SuperViewController {
             return cellView
         }
         //残量バーを表示する
-        let amountBar = CGRect(x: 0, y: 0 , width: mainBoundSize.width, height: cellHeight*0.07)
+        let amountBar = CGRect(x: 0, y: 0 , width: mainBoundSize.width, height: cellHeight*0.1)
         let value:CGFloat = CGFloat(amount!)
         let mainWidth = ViewProperties.mainBoundSize.width
         let viewWidth:CGFloat = mainWidth * (value)/100
-        let coverView:UIView = UIView(frame: CGRect(x: 0, y: cellHeight*0.93 , width: viewWidth, height: cellHeight*0.07))
+        let coverView:UIView = UIView(frame: CGRect(x: 0, y: cellHeight*0.9 , width: viewWidth, height: cellHeight*0.1))
         coverView.layer.addSublayer(ViewProperties.gradientLayer(frame: amountBar))
         coverView.clipsToBounds = true
         cellView.addSubview(coverView)
         return cellView
     }
     
+    
     //リストの順番をカテゴリー毎に分ける。
-    func Array_order(ListArray:[StockDataClass]) -> [[StockDataClass]]{
+    func Array_order(ListArray:[DeletedDataClass]) -> [[Any]]{
         var Array = [[]]
         let categoryArray = CategoryClass.CategoryArray
         var count = 0
@@ -122,11 +148,11 @@ class SuperViewController_List: SuperViewController {
             }
             count += 1
         }
-        return Array as! [[StockDataClass]]
+        return Array
     }
     
-    func Array_order_return(Array:[[StockDataClass]]) -> [StockDataClass]{
-        var returnArray:Array<StockDataClass> = []
+    func Array_order_return(Array:[[DeletedDataClass]]) -> [Any]{
+        var returnArray:Array<Any> = []
         for datas in Array{
             for data in datas{
                 returnArray.append(data)

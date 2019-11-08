@@ -12,6 +12,13 @@ import UIKit
 //削除データクラス
 class DeletedDataClass : Codable {
     
+    enum DeletedCodingKeys : String, CodingKey{
+        case Name
+        case Category
+        case Number
+        case Image
+    }
+    
     var Name:String
     func Change_Name(name:String){
         self.Name = name
@@ -27,19 +34,47 @@ class DeletedDataClass : Codable {
         self.Number = number
     }
     
-    var Image:String?
-    func Change_Image(image:String){
+    var Image:UIImage?
+    func Change_Image(image:UIImage){
         self.Image = image
     }
     
-    init(Name:String,Category:String?,Number:Double?,Image:String?) {
+    init(Name:String,Category:String?,Number:Double?,Image:UIImage?) {
         //nilだった場合の処理
-        //Number = -9999
-        //Image = ""
+        //Number = nil
+        //Image = nil
         self.Name = Name
         self.Category = Category ?? CategoryClass.CategoryArray.last!
-        self.Number = Number ?? -9999
-        self.Image = Image ?? ""
+        self.Number = Number
+        self.Image = Image
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: DeletedCodingKeys.self)
+        let name = try values.decode(String.self, forKey: .Name)
+        let category = try values.decode(String.self, forKey: .Category)
+        let number = try values.decode(Double?.self, forKey: .Number)
+        let image: UIImage?
+        if let imageDataBase64String = try values.decode(String?.self, forKey: .Image){
+            if let data = Data(base64Encoded: imageDataBase64String) {
+                image = UIImage(data: data)
+            } else {
+                image = nil
+            }
+        } else {
+            image = nil
+        }
+        self.init(Name: name, Category: category, Number: number, Image: image)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: DeletedCodingKeys.self)
+        try container.encode(Name, forKey: .Name)
+        try container.encode(Category, forKey: .Category)
+        try container.encode(Number, forKey: .Number)
+        ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
+        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        try container.encode(imageDataBase64String, forKey: .Image)
     }
     
 }
@@ -61,31 +96,39 @@ class ShoppingDataClass : DeletedDataClass {
         case Memo
     }
     
-    init(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?) {
+    init(Name:String,Category:String?,Number:Double?,Image:UIImage?,Memo:String?) {
         super.init(Name: Name, Category: Category, Number: Number, Image: Image)
-        //値の代入とnilだった場合の処理
-        //Memo = ""
-        self.Memo = Memo ?? ""
+        self.Memo = Memo
     }
     
-    required init(from decoder: Decoder) throws {
+    required convenience init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: ShoppingCodingKeys.self)
-        self.Memo = try values.decode(String.self, forKey: .Memo)
         let name = try values.decode(String.self, forKey: .Name)
         let category = try values.decode(String.self, forKey: .Category)
-        let number = try values.decode(Double.self, forKey: .Number)
-        let image = try values.decode(String.self, forKey: .Image)
-
-        super.init(Name: name, Category: category, Number: number, Image: image)
+        let number = try values.decode(Double?.self, forKey: .Number)
+        let image: UIImage?
+        if let imageDataBase64String = try values.decode(String?.self, forKey: .Image){
+            if let data = Data(base64Encoded: imageDataBase64String) {
+                image = UIImage(data: data)
+            } else {
+                image = nil
+            }
+        } else {
+            image = nil
+        }
+        let memo = try values.decode(String?.self, forKey: .Memo)
+        self.init(Name: name, Category: category, Number: number, Image: image, Memo:memo)
     }
     
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: ShoppingCodingKeys.self)
-        try container.encode(self.Name, forKey: .Name)
-        try container.encode(self.Category, forKey: .Category)
-        try container.encode(self.Number, forKey: .Number)
+        try container.encode(Name, forKey: .Name)
+        try container.encode(Category, forKey: .Category)
+        try container.encode(Number, forKey: .Number)
+        ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
+        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        try container.encode(imageDataBase64String, forKey: .Image)
         try container.encode(self.Memo, forKey: .Memo)
-        try container.encode(self.Image, forKey: .Image)
     }
     
 }
@@ -94,12 +137,12 @@ class ShoppingDataClass : DeletedDataClass {
 class StockDataClass : ShoppingDataClass{
     
     var ExpDate:String?
-    func Change_Date(date:String?){
-        self.ExpDate = date ?? "nil"
+    func Change_Date(date:String){
+        self.ExpDate = date
     }
     
     var Amount:Double?
-    func Change_Amount(amount:Double!){
+    func Change_Amount(amount:Double){
         self.Amount = amount
     }
     
@@ -113,34 +156,41 @@ class StockDataClass : ShoppingDataClass{
         case Amount
     }
     
-    init(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?,ExpDate:String?,Amount:Double?) {
+    init(Name:String,Category:String?,Number:Double?,Image:UIImage?,Memo:String?,ExpDate:String?,Amount:Double?) {
         super.init(Name: Name, Category: Category, Number: Number, Image: Image, Memo: Memo)
         //値の代入とnilだった場合の処理
-        //ExpDate = "nil"
-        //Amount = -999
-        self.ExpDate = ExpDate ?? "nil"
-        self.Amount = Amount ?? -999
-    }
+        self.ExpDate = ExpDate
+        self.Amount = Amount
+        }
     
-    required init(from decoder: Decoder) throws {
+    required convenience init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: StockCodingKeys.self)
-        self.ExpDate = try values.decode(String.self, forKey: .ExpDate)
-        self.Amount = try values.decode(Double.self, forKey: .Amount)
         let name = try values.decode(String.self, forKey: .Name)
         let category = try values.decode(String.self, forKey: .Category)
-        let number = try values.decode(Double.self, forKey: .Number)
-        let image = try values.decode(String.self, forKey: .Image)
-        let memo = try values.decode(String.self, forKey: .Memo)
-        super.init(Name: name, Category: category, Number: number, Image: image, Memo: memo)
+        let number = try values.decode(Double?.self, forKey: .Number)
+        let imageDataBase64String = try values.decode(String?.self, forKey: .Image)
+        let image: UIImage?
+        if let data = Data(base64Encoded: imageDataBase64String!) {
+            image = UIImage(data: data)
+        } else {
+            image = nil
+        }
+        
+        let memo = try values.decode(String?.self, forKey: .Memo)
+        let expDate = try values.decode(String?.self, forKey: .ExpDate)
+        let amount = try values.decode(Double?.self, forKey: .Amount)
+        self.init(Name: name, Category: category, Number: number, Image: image, Memo:memo,ExpDate:expDate, Amount:amount)
     }
     
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: StockCodingKeys.self)
-        try container.encode(self.Name, forKey: .Name)
-        try container.encode(self.Category, forKey: .Category)
-        try container.encode(self.Number, forKey: .Number)
+        try container.encode(Name, forKey: .Name)
+        try container.encode(Category, forKey: .Category)
+        try container.encode(Number, forKey: .Number)
+        ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
+        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        try container.encode(imageDataBase64String, forKey: .Image)
         try container.encode(self.Memo, forKey: .Memo)
-        try container.encode(self.Image, forKey: .Image)
         try container.encode(self.ExpDate, forKey: .ExpDate)
         try container.encode(self.Amount, forKey: .Amount)
     }

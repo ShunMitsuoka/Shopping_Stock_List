@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SaveDataClass{
     
@@ -79,7 +80,6 @@ class SaveDataClass{
                 return decodeData!
             }
         case UserDafaultsKey.CategoryData.rawValue:
-            
             let category = CategoryClass()
             let encodeData = try? JSONEncoder().encode(category.CategoryArray_fundamental)
             UserDefaults.standard.register(defaults: [UserDafaultsKey.CategoryData.rawValue: encodeData!])
@@ -96,11 +96,26 @@ class SaveDataClass{
     }
     
     //データ追加
-    static func add_StockData(Name:String,Category:String,Number:Double?,Image:String?,Memo:String?,ExpDate:String?,Amount:Double?){
+    static func add_StockData(Name:String,Category:String,Number:Double?,Image:UIImage?,Memo:String?,ExpDate:String?,Amount:Double?){
         let data:StockDataClass = StockDataClass(Name: Name, Category: Category, Number: Number, Image: Image, Memo: Memo, ExpDate: ExpDate, Amount: Amount)
         var ArrayData = LoadData(KeyName: UserDafaultsKey.StockData.rawValue) as! Array<StockDataClass>
         ArrayData.append(data)
         SaveData(inputData: ArrayData, KeyName: UserDafaultsKey.StockData.rawValue)
     }
+    
+    static func add_ShoppingData(Name:String,Category:String,Number:Double?,Image:UIImage?,Memo:String?){
+        let data:ShoppingDataClass = ShoppingDataClass(Name: Name, Category: Category, Number: Number, Image: Image, Memo: Memo)
+        var ArrayData = LoadData(KeyName: UserDafaultsKey.ShoppingData.rawValue) as! Array<ShoppingDataClass>
+        ArrayData.append(data)
+        SaveData(inputData: ArrayData, KeyName: UserDafaultsKey.ShoppingData.rawValue)
+    }
+    
+    static func add_DeletedData(Name:String,Category:String,Number:Double?,Image:UIImage?){
+        let data:DeletedDataClass = DeletedDataClass(Name: Name, Category: Category, Number: Number, Image: Image)
+        var ArrayData = LoadData(KeyName: UserDafaultsKey.DeletedData.rawValue) as! Array<DeletedDataClass>
+        ArrayData.append(data)
+        SaveData(inputData: ArrayData, KeyName: UserDafaultsKey.DeletedData.rawValue)
+    }
+    
     
 }

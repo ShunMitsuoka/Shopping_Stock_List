@@ -17,7 +17,7 @@ class Category_Image_cell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
-        self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width, height: ViewProperties.cellHeight*3)
+        self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width, height: ViewProperties.imageCellHeight)
         self.backgroundColor = UIColor(red: 225/255, green: 200/255, blue: 168/255, alpha: 1)
         
         //categoryView追加

@@ -14,7 +14,7 @@ class CategoryView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width*0.6, height: ViewProperties.cellHeight*3)
+        self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width*0.6, height: ViewProperties.imageCellHeight)
         self.backgroundColor = UIColor.white
         collectionView.backgroundColor = UIColor(red: 225/255, green: 200/255, blue: 168/255, alpha: 1)
         
@@ -42,7 +42,7 @@ class CategoryView: UIView {
     
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout())
     let flowLayout = UICollectionViewFlowLayout()
-    var category:String = "others"
+    var category:String = CategoryClass.CategoryArray.last!
     // new = 0
     // detail = 1
     var identfierID:Int = 0

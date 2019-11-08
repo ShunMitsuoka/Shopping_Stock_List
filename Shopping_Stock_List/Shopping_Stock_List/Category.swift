@@ -9,6 +9,7 @@
 import Foundation
 
 class CategoryClass {
+    
     let CategoryArray_fundamental:Array<String> = ["meat","vegitable","drink","others"]
     static var CategoryArray:Array<String>{
         get {
@@ -25,4 +26,5 @@ class CategoryClass {
         print("存在しないcategoryが渡されました。")
         fatalError()
     }
+    
 }

@@ -11,20 +11,65 @@ import UIKit
 class DeletedListView: SuperViewController_List {
 
     override func viewDidLoad() {
+        self.customReloadData()
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        print("DeletedList画面が再表示されました。")
+        self.customReloadData()
     }
-    */
-
+    
+    var ListArray:[DeletedDataClass] = []
+    var ListArray_category:[[DeletedDataClass]] = [[]]
+    
+    //Reload設定
+    override func customReloadData(){
+        ListArray_category = Array_order(ListArray: ListArrayClass.DeletedListArray) as! [[DeletedDataClass]]
+        ListArray = Array_order_return(Array: ListArray_category) as! [DeletedDataClass]
+        SaveDataClass.SaveData(inputData: ListArray, KeyName: "DeletedData")
+        tableView.reloadData()
+    }
+    
+    
+    //cellの表示設定
+    override func CellView(indexpath:IndexPath) -> UIView {
+        let Name = ListArray_category[indexpath.section][indexpath.row].Name
+        let Number:Double? = nil
+        let cell_view:UIView = shoppingCellView(name: Name, number: Number)
+        return cell_view
+    }
+    
+    //section内のcell数
+    override func numberOfRowsInSection(section:Int) -> Int {
+        return ListArray_category[section].count
+    }
+    
+    //データ削除
+    override func deleteData(indexpath:IndexPath){
+        ListArray_category[indexpath.section].remove(at: indexpath.row)
+        tableView.deleteRows(at: [indexpath], with: .bottom)
+        ListArray = Array_order_return(Array: ListArray_category) as! [DeletedDataClass]
+        SaveDataClass.SaveData(inputData: ListArray, KeyName: "DeletedData")
+    }
+    
+    ///swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        ///選択されたデータ取得
+        let sendData = self.ListArray_category[indexPath.section][indexPath.row]
+        ///買い物リストへ
+        let sendShoppingList_Action = UIContextualAction(style: .destructive, title: "買い物リストへ", handler:
+        {(action:UIContextualAction,view:UIView,completion:(Bool) -> Void) in
+            let ShoppingData = self.DeletedToShopping(DeletedData: sendData)
+            ListArrayClass.appendData(appendData: ShoppingData)
+            ///データを削除
+            self.deleteData(indexpath: indexPath)
+            completion(true)
+        })
+        sendShoppingList_Action.backgroundColor = UIColor.blue
+        return UISwipeActionsConfiguration(actions: [sendShoppingList_Action])
+    }
+    
+    
 }

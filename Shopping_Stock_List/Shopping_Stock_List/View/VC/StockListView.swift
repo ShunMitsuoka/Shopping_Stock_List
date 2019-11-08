@@ -139,6 +139,34 @@ class StockListView: SuperViewController_List {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    ///swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        ///選択されたデータ取得
+        let sendData = self.ListArray_category[indexPath.section][indexPath.row]
+        ///削除リストへ
+        let sendDeletedList_Action = UIContextualAction(style: .destructive, title: "削除リストへ", handler:
+        {(action:UIContextualAction,view:UIView,completion:(Bool) -> Void) in
+            let deletedData = self.StockToDeleted(StockData: sendData)
+            ListArrayClass.appendData(appendData: deletedData)
+            ///データを削除
+            self.deleteData(indexpath: indexPath)
+            completion(true)
+        })
+        ///買い物リストへ
+        let sendShoppingList_Action = UIContextualAction(style: .destructive, title: "買い物リストへ", handler:
+        {(action:UIContextualAction,view:UIView,completion:(Bool) -> Void) in
+            let ShoppingData = self.StockToShopping(StockData: sendData)
+            ListArrayClass.appendData(appendData: ShoppingData)
+            ///データを削除
+            self.deleteData(indexpath: indexPath)
+            completion(true)
+        })
+        sendDeletedList_Action.backgroundColor = UIColor.orange
+        sendShoppingList_Action.backgroundColor = UIColor.blue
+        return UISwipeActionsConfiguration(actions: [sendDeletedList_Action,sendShoppingList_Action])
+    }
+
+    
     /*
      // MARK: - Navigation
      

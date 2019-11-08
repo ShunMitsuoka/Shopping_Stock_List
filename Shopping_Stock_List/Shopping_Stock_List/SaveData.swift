@@ -117,5 +117,12 @@ class SaveDataClass{
         SaveData(inputData: ArrayData, KeyName: UserDafaultsKey.DeletedData.rawValue)
     }
     
+    static func add_Category(category:String){
+        var categoryArray = CategoryClass.CategoryArray
+        categoryArray.insert(category, at: categoryArray.count-1)
+        SaveData(inputData: categoryArray, KeyName: UserDafaultsKey.CategoryData.rawValue)
+        
+    }
+    
     
 }

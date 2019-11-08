@@ -133,6 +133,30 @@ class SuperViewController_List: SuperViewController {
         return cellView
     }
     
+    ///Setting画面
+    ///Cellの内容表示
+    func settingCellView(indexpath:IndexPath) -> UIView{
+        let cellView = UIView(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width, height: cellHeight))
+        cellView.backgroundColor = UIColor.clear
+        let nameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width*0.5, height: cellHeight))
+        switch indexpath.section {
+        case 0:
+            switch indexpath.row{
+            case 0:
+                nameLabel.text = "カテゴリーの編集"
+            default:
+                nameLabel.text = ""
+            }
+        default:
+            nameLabel.text = ""
+        }
+        nameLabel.textColor = UIColor.black
+        nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/8)
+        nameLabel.textAlignment = NSTextAlignment.center
+        cellView.addSubview(nameLabel)
+        return cellView
+    }
+    
     
     //リストの順番をカテゴリー毎に分ける。
     func Array_order(ListArray:[DeletedDataClass]) -> [[Any]]{
@@ -161,6 +185,32 @@ class SuperViewController_List: SuperViewController {
         return returnArray
     }
     
+    ///リスト間のデータやりとり
+    //買い物リストからストックリストへ
+    func ShoppingToStock(ShoppingData:ShoppingDataClass) -> StockDataClass {
+        let returnData = StockDataClass(Name: ShoppingData.Name, Category: ShoppingData.Category, Number: ShoppingData.Number, Image: ShoppingData.Image, Memo: ShoppingData.Memo, ExpDate: nil, Amount: nil)
+        return returnData
+    }
+    //買い物リストから削除リストへ
+    func ShoppingToDeleted(ShoppingData:ShoppingDataClass) -> DeletedDataClass {
+        let returnData = DeletedDataClass(Name: ShoppingData.Name, Category: ShoppingData.Category, Number: ShoppingData.Number, Image: ShoppingData.Image)
+        return returnData
+    }
+    //ストックリストから削除リストへ
+    func StockToDeleted(StockData:StockDataClass) -> DeletedDataClass {
+        let returnData = DeletedDataClass(Name: StockData.Name, Category: StockData.Category, Number: StockData.Number, Image: StockData.Image)
+        return returnData
+    }
+    //ストックリストから買い物リストへ
+    func StockToShopping(StockData:StockDataClass) -> ShoppingDataClass {
+        let returnData = ShoppingDataClass(Name: StockData.Name, Category: StockData.Category, Number: StockData.Number, Image: StockData.Image, Memo: StockData.Memo)
+        return returnData
+    }
+    //削除リストから買い物リストへ
+    func DeletedToShopping(DeletedData:DeletedDataClass) -> ShoppingDataClass {
+        let returnData = ShoppingDataClass(Name: DeletedData.Name, Category: DeletedData.Category, Number: DeletedData.Number, Image: DeletedData.Image, Memo: nil)
+        return returnData
+    }
 
     /*
     // MARK: - Navigation

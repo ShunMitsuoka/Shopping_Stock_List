@@ -48,7 +48,6 @@ class ViewProperties {
     
     //header情報
     static func headerView(section:Int) -> UIView{
-        
         let headerview = UIView()
         headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: 30 )
         headerview.backgroundColor = UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
@@ -58,6 +57,27 @@ class ViewProperties {
         headerview.layer.addSublayer(BottomLine)
         let headerLabel = UILabel(frame: CGRect(x:10, y: -1, width: mainBoundSize.width, height: 30))
         headerLabel.text = CategoryClass.CategoryArray[section]
+        headerLabel.font = UIFont.systemFont(ofSize: 25)
+        headerview.addSubview(headerLabel)
+        return headerview
+    }
+    
+    ///setting画面のheader
+    static func SettingheaderView(section:Int) -> UIView{
+        let headerview = UIView()
+        headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: 40 )
+        headerview.backgroundColor = UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
+        let BottomLine = CALayer()
+        BottomLine.frame = CGRect(x: 0, y: 28, width: ViewProperties.mainBoundSize.width,height: 2)
+        BottomLine.backgroundColor = UIColor(red: 120/255, green: 91/255, blue: 84/255, alpha: 1).cgColor
+        headerview.layer.addSublayer(BottomLine)
+        let headerLabel = UILabel(frame: CGRect(x:10, y: -3, width: mainBoundSize.width, height: 40))
+        switch section {
+        case 0:
+            headerLabel.text = "カテゴリー"
+        default:
+            headerLabel.text = ""
+        }
         headerLabel.font = UIFont.systemFont(ofSize: 25)
         headerview.addSubview(headerLabel)
         return headerview

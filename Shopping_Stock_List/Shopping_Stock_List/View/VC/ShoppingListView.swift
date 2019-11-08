@@ -69,7 +69,6 @@ class ShoppingListView: SuperViewController_List {
         tableView.deleteRows(at: [indexpath], with: .bottom)
         ListArray = Array_order_return(Array: ListArray_category) as! [ShoppingDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "ShoppingData")
-        
     }
     
     //cell選択時segue
@@ -127,6 +126,35 @@ class ShoppingListView: SuperViewController_List {
         default:
             fatalError()
         }
+    }
+    
+    ///swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        ///選択されたデータ取得
+        let sendData = self.ListArray_category[indexPath.section][indexPath.row]
+        
+        let sendDeletedList_Action = UIContextualAction(style: .destructive, title: "削除リストへ", handler:
+        {(action:UIContextualAction,view:UIView,completion:(Bool) -> Void) in
+            ///削除リストへ
+            let deletedData = self.ShoppingToDeleted(ShoppingData: sendData)
+            ListArrayClass.appendData(appendData: deletedData)
+            ///データを削除
+            self.deleteData(indexpath: indexPath)
+            completion(true)
+        })
+        let sendStockList_Action = UIContextualAction(style: .destructive, title: "ストックリストへ", handler:
+        {(action:UIContextualAction,view:UIView,completion:(Bool) -> Void) in
+            ///ストックリストへ
+            let StockData = self.ShoppingToStock(ShoppingData: sendData)
+            ListArrayClass.appendData(appendData: StockData)
+            ///データを削除
+            self.deleteData(indexpath: indexPath)
+            completion(true)
+        })
+        
+        sendDeletedList_Action.backgroundColor = UIColor.orange
+        sendStockList_Action.backgroundColor = UIColor.blue
+        return UISwipeActionsConfiguration(actions: [sendDeletedList_Action,sendStockList_Action])
     }
 
 }

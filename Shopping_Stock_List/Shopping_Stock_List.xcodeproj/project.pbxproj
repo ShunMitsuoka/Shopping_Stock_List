@@ -44,6 +44,8 @@
 		B322E6FC23121D41000436C8 /* Error_Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322E6FB23121D41000436C8 /* Error_Alert.swift */; };
 		B322E704231229E5000436C8 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322E703231229E5000436C8 /* Extension.swift */; };
 		B322E70723122C37000436C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B322E70923122C37000436C8 /* Localizable.strings */; };
+		B352F9AC23754E7700942A4C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352F9AB23754E7700942A4C /* SettingViewController.swift */; };
+		B352F9AF23755A9C00942A4C /* Category_setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352F9AE23755A9C00942A4C /* Category_setting.swift */; };
 		B3F5CC2322B6100900EA21B9 /* MyUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5CC2222B6100900EA21B9 /* MyUINavigationController.swift */; };
 		B3F5CC2522B6116600EA21B9 /* MyUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5CC2422B6116600EA21B9 /* MyUITabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -110,6 +112,8 @@
 		B322E703231229E5000436C8 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		B322E70823122C37000436C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B322E70A23122C42000436C8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B352F9AB23754E7700942A4C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		B352F9AE23755A9C00942A4C /* Category_setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category_setting.swift; sourceTree = "<group>"; };
 		B3F5CC2222B6100900EA21B9 /* MyUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUINavigationController.swift; sourceTree = "<group>"; };
 		B3F5CC2422B6116600EA21B9 /* MyUITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUITabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,10 +226,12 @@
 				B314A37022A8DB2500E565B4 /* ShoppingListView.swift */,
 				B31A609D2309186F002152BD /* StockListView.swift */,
 				B31E403F236048250018C62E /* DeletedListView.swift */,
+				B352F9AB23754E7700942A4C /* SettingViewController.swift */,
 				B320B2132311710A00DCC5D3 /* StockListDetails.swift */,
 				B3212B2823603B4F00387B31 /* ShoppingListDetails.swift */,
 				B31A609F23091F21002152BD /* add_StockListView.swift */,
 				B300F91A235878160040C5B1 /* add_ShoppingListView.swift */,
+				B352F9AD23755A1C00942A4C /* SettingVC */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -244,6 +250,14 @@
 				B31E4E08230A573100075C60 /* MemoCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		B352F9AD23755A1C00942A4C /* SettingVC */ = {
+			isa = PBXGroup;
+			children = (
+				B352F9AE23755A9C00942A4C /* Category_setting.swift */,
+			);
+			path = SettingVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,8 +398,10 @@
 				B3198B312309B379003C457C /* AmountCell.swift in Sources */,
 				B315E7692311155C0020BBE8 /* SuperViewController.swift in Sources */,
 				B31553CE22A61D6C001EC253 /* Data.swift in Sources */,
+				B352F9AC23754E7700942A4C /* SettingViewController.swift in Sources */,
 				B31CDE2623097D62007A2B44 /* ExpDateCell.swift in Sources */,
 				B322E6FC23121D41000436C8 /* Error_Alert.swift in Sources */,
+				B352F9AF23755A9C00942A4C /* Category_setting.swift in Sources */,
 				B314A37422A8DBD100E565B4 /* ViewProperties.swift in Sources */,
 				B31553A022A61842001EC253 /* AppDelegate.swift in Sources */,
 				B31A609823090A68002152BD /* SuperNameCell.swift in Sources */,

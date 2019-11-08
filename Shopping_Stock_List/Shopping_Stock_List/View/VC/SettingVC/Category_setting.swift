@@ -73,7 +73,7 @@ class Category_setting: SuperViewController_List {
             addBtn.setTitle("追加", for: .normal )
             cellView.addSubview(addBtn)
         }else if indexpath.section == 1{
-            cellView.addSubview(CategoryCollectionView)
+            return CategoryCollectionView
         }
         return cellView
     }
@@ -88,7 +88,7 @@ class Category_setting: SuperViewController_List {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return cellHeight
+            return cellHeight*1.3
         }else if indexPath.section == 0{
             return self.tableView.bounds.height - cellHeight
         }
@@ -122,14 +122,14 @@ class Category_setting: SuperViewController_List {
     }
 }
 
-extension Category_setting:UICollectionViewDataSource{
+extension Category_setting:UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return CategoryClass.CategoryArray.count-1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = CategoryCollectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath)
         cell.backgroundColor = cellColor
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: cellWidth, height: cellWidth))
         label.textAlignment = .center
@@ -151,7 +151,7 @@ extension Category_setting:UICollectionViewDataSource{
     
 }
 
-extension Category_setting: UICollectionViewDelegate{
+extension Category_setting:UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("cell選ばれた")

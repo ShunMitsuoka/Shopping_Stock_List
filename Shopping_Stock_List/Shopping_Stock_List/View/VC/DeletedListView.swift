@@ -13,6 +13,7 @@ class DeletedListView: SuperViewController_List {
     override func viewDidLoad() {
         self.customReloadData()
         super.viewDidLoad()
+        self.tableView.allowsSelection = false
         // Do any additional setup after loading the view.
     }
     

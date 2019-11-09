@@ -6,5 +6,14 @@
   Copyright © 2019 光岡駿. All rights reserved.
 */
 
+///common
+"delete" = "delete";
+"add" = "add";
+"save" = "save";
 
 "VC100_Name" = "Food name is blank";
+
+"category_add_error_001" = "The cayegory already exsits";
+"category_delete_error_001" = "Data were left in this catgegory of ShoppingList";
+"category_delete_error_002" = "Data were left in this catgegory of StockList";
+"category_delete_error_003" = "Data were left in this catgegory of DeletedList";

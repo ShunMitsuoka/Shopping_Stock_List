@@ -124,5 +124,8 @@ class SaveDataClass{
         
     }
     
-    
+    static func save_Category_order(categoryArray:Array<String>){
+        SaveData(inputData: categoryArray, KeyName: UserDafaultsKey.CategoryData.rawValue)
+    }
+        
 }

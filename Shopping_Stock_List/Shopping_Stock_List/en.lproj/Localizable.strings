@@ -7,6 +7,9 @@
 */
 
 ///common
+"shoppingList" = "shopping";
+"stockList" = "stock";
+"deletedList" = "deleted";
 "delete" = "delete";
 "add" = "add";
 "save" = "save";

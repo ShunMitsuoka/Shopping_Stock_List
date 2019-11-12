@@ -16,14 +16,26 @@ class SuperViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         view.backgroundColor = ViewProperties.backgroundColor
-        
+        naviBarImageSize = CGSize(width: self.navigationHeight*0.6, height: self.navigationHeight*0.6)
+        tabBarImageSize = CGSize(width: self.tabBarHeight*0.9, height: self.tabBarHeight*0.9)
         //notificationの監視
         self.configureObserer()
     }
     
     var mainBoundSize = ViewProperties.mainBoundSize
     var cellHeight = ViewProperties.cellHeight
-    
+    var navigationHeight:CGFloat!{
+        get{
+            return self.navigationController?.navigationBar.frame.size.height
+        }
+    }
+    var tabBarHeight:CGFloat!{
+        get{
+            return self.tabBarController?.tabBar.frame.size.height
+        }
+    }
+    var naviBarImageSize:CGSize!
+    var tabBarImageSize:CGSize!
     
     //Notificationを設定
     func configureObserer(){

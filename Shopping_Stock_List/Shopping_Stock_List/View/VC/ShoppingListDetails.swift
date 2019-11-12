@@ -91,6 +91,7 @@ class ShoppingListDetails: add_ShoppingListView {
     
     //遷移する際の動作
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if segue.identifier == "unwind_fromShoppingToDetail"{
             print("データを保存します。")
             let ShoppingListVC = segue.destination as! ShoppingListView

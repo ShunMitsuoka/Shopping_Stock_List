@@ -14,6 +14,8 @@ class ShoppingListView: SuperViewController_List {
         self.customReloadData()
         super.viewDidLoad()
         
+        self.tabBarController?.tabBarItem.image = UIImage(named: "shopping")?.reSizeImage(reSize: tabBarImageSize)
+        
         // Do any additional setup after loading the view.
         addButton.frame = CGRect(x: 0,y: 0 , width: 50, height: 50)
         addButton.layer.position = CGPoint(x: ViewProperties.mainBoundSize.width - 50, y: ViewProperties.mainBoundSize.height - tabBarHeight - 40)

@@ -60,10 +60,7 @@ class CameraVC: UIViewController {
         self.photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
     }
     
-    @IBOutlet weak var SaveBtn: UIButton!
-    @IBAction func SaveBtn(_ sender: Any) {
-    }
-    
+
     @IBOutlet weak var cancelBtn: UIButton!
     @IBAction func cancelBtn(_ sender: Any) {
     }
@@ -163,7 +160,54 @@ class CameraVC: UIViewController {
         self.captureBtn.layer.cornerRadius = min(self.captureBtn.frame.width, self.captureBtn.frame.height) / 2
         
         self.cancelBtn.frame = CGRect(x: ViewProperties.mainBoundSize.width/2 - 140, y: textBtnY, width: 80, height: 30)
-        self.SaveBtn.frame = CGRect(x: ViewProperties.mainBoundSize.width/2 + 60, y: textBtnY, width: 80, height: 30)
+    }
+    
+    ///画像をトリミング
+    func trimmingImage(capturedImage:UIImage) -> UIImage{
+        let Imageframe = frameView!
+        print("Viewのフレームは\(CameraPreviewView.frame)")
+        print("imageViewのフレームは\(Imageframe.frame)")
+        print("撮影した写真のsizeは\(capturedImage.size)")
+        let xRatio:CGFloat = capturedImage.size.width/self.CameraPreviewView.frame.width
+        let yRatio:CGFloat = capturedImage.size.height/self.CameraPreviewView.frame.height
+        print("xとyの比は\(xRatio),\(yRatio)")
+        let triX:CGFloat  = Imageframe.frame.origin.x * xRatio
+        let triY:CGFloat  = Imageframe.frame.origin.y * yRatio
+        print("トリミングするxとyは\(triX),\(triY)")
+        let triWidth:CGFloat  = Imageframe.frame.width * xRatio
+        let triHeight:CGFloat  = Imageframe.frame.height * yRatio
+        print("トリミングする際のwidthとheightは\(triWidth),\(triHeight)")
+        
+        let imageView:UIImageView = UIImageView(frame: CameraPreviewView.frame)
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = capturedImage.reSizeImage(reSize: CGSize(width: CameraPreviewView.frame.width, height: CameraPreviewView.frame.height))
+        self.CameraPreviewView.addSubview(imageView)
+        
+        ///トリミングするためにcgImageに変換する際、サイズによってトリミングの向きを変える。
+        var trimmingArea:CGRect!
+        var imgRef:CGImage!
+        var trimImage:UIImage!
+        if triWidth > triHeight {
+            print("回転させます")
+            let cgimage = capturedImage.cgImage
+            trimmingArea = CGRect(x: triY, y: triX, width: triHeight, height: triWidth)
+            imgRef = cgimage!.cropping(to: trimmingArea)
+            trimImage = UIImage(cgImage: imgRef!, scale: 0, orientation: capturedImage.imageOrientation)
+        }else{
+            trimmingArea = CGRect(x: triX, y: triY, width: triWidth, height: triHeight)
+            imgRef = capturedImage.cgImage?.cropping(to: trimmingArea)
+            trimImage = UIImage(cgImage: imgRef!, scale: 0, orientation: capturedImage.imageOrientation)
+        }
+        
+
+        print("トリミング後の写真サイズは\(trimImage.size)")
+        let resize_triImage = trimImage.reSizeImage(reSize: CGSize(width: Imageframe.frame.width, height: Imageframe.frame.height))
+        let triImageView:UIImageView = UIImageView(frame: Imageframe.frame)
+        triImageView.contentMode = .center
+        triImageView.image = resize_triImage
+        self.CameraPreviewView.addSubview(triImageView)
+        
+        return trimImage
     }
     
     //segue設定
@@ -178,55 +222,29 @@ class CameraVC: UIViewController {
             }
         case "unwind_fromCameraVC_cancel":
             return
+        //モーダル画面に遷移する際の動作
+        case "fromCameraVCtoModal":
+            let CameraModalVC = segue.destination as! CameraModalVC
+            CameraModalVC.shownImage = self.capturedImage
         default:
             print("存在しないsegueIdentfierです。")
             fatalError()
         }
     }
     
-    ///画像をトリミング
-    func trimmingImage(capturedImage:UIImage) -> UIImage{
-        
-        let imageView:UIImageView = UIImageView(frame: CameraPreviewView.frame)
-        imageView.contentMode = .center
-        let imageView_:UIImageView = UIImageView(frame: CameraPreviewView.frame)
-        imageView_.contentMode = .center
-        
-        let resizedSize = CGSize(width: CameraPreviewView.frame.width, height: CameraPreviewView.frame.height)
-        UIGraphicsBeginImageContextWithOptions(resizedSize, false, 0.0) // 変更
-        capturedImage.draw(in: CGRect(origin: .zero, size: resizedSize))
-        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        print(resizedImage?.size)
-        
-        imageView_.image = resizedImage!
-        self.CameraPreviewView.addSubview(imageView_)
-        
-        self.CameraPreviewView.addSubview(frameView!)
-
-        
-        let xRatio:CGFloat = capturedImage.size.width/self.CameraPreviewView.frame.width
-        let yRatio:CGFloat = capturedImage.size.height/self.CameraPreviewView.frame.height
-        let triWidth:CGFloat  = frameView!.frame.width * xRatio
-        let triHeight:CGFloat  = frameView!.frame.height * yRatio
-        
-        let triX:CGFloat  = (capturedImage.size.width - triWidth)/2
-        let triY:CGFloat  = (capturedImage.size.height - triHeight)/2
-        let trimmingArea:CGRect = frameView!.frame
-        print(triHeight)
-        print(triWidth)
-        print(CameraPreviewView.frame)
-        print(frameView?.frame)
-        print(capturedImage.size)
-        print(trimmingArea)
-        let imgRef = resizedImage!.cgImage?.cropping(to: trimmingArea)
-        print(imgRef?.width)
-        let trimImage = UIImage(cgImage: imgRef!, scale: 0, orientation: resizedImage!.imageOrientation)
-        print(trimImage.size)
-        imageView.image = trimImage
-        self.CameraPreviewView.addSubview(imageView)
-        
-        return trimImage
+    //モーダル画面からのunwind設定
+    @IBAction func unwindPrev(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        switch unwindSegue.identifier {
+        case "unwind_save":
+            performSegue(withIdentifier: "unwind_fromCameraVC_save", sender: nil)
+        case "unwind_cancel":
+            for subview in self.CameraPreviewView.subviews{
+                subview.removeFromSuperview()
+            }
+            setCaptureFrame()
+        default:
+            fatalError()
+        }
     }
 
 }
@@ -239,6 +257,7 @@ extension CameraVC: AVCapturePhotoCaptureDelegate{
             // Data型をUIImageオブジェクトに変換
             if let uiImage = UIImage(data: imageData){
                 self.capturedImage = trimmingImage(capturedImage: uiImage)
+                performSegue(withIdentifier: "fromCameraVCtoModal", sender: nil)
             }
         }
     }

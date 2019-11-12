@@ -70,17 +70,17 @@ class add_ShoppingListView: SuperVC_StockDetails {
     
     //追加ボタンを押された際に遷移するかどうか判断
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        name = nameCell_add!.textField.text
-        category = category_image_Cell!.categoryView!.category
-        image = category_image_Cell!.imageview!.image
-        if let num = numberCell!.NumberField.text{
-            number = Double(num)
-        }else{
-            number = nil
-        }
-        memo = memoCell!.textView.text
         
         if identifier == "unwind_fromShoppingToAdd"{
+            name = nameCell_add!.textField.text
+            category = category_image_Cell!.categoryView!.category
+            image = category_image_Cell!.imageview!.image
+            if let num = numberCell!.NumberField.text{
+                number = Double(num)
+            }else{
+                number = nil
+            }
+            memo = memoCell!.textView.text
             //nameは必要
             if (name == nil || name == "") {
                 //alert表示
@@ -90,7 +90,7 @@ class add_ShoppingListView: SuperVC_StockDetails {
                 return true
             }
         }
-        return false
+        return true
     }
     
     //遷移する際の動作

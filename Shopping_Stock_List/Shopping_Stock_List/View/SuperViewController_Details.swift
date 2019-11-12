@@ -53,16 +53,6 @@ class SuperViewController_Details: SuperViewController {
             return ViewProperties.mainBoundSize.height - navigationHeight
         }
     }
-    var navigationHeight:CGFloat!{
-        get{
-            return self.navigationController?.navigationBar.frame.size.height
-        }
-    }
-    var tabBarHeight:CGFloat!{
-        get{
-            return self.tabBarController?.tabBar.frame.size.height
-        }
-    }
     
 
     /*

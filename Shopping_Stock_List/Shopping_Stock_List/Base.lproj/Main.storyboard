@@ -146,17 +146,6 @@
                                             <segue destination="Qxd-wW-WNX" kind="unwind" identifier="unwind_fromCameraVC_cancel" unwindAction="unwindPrevFor:towards:" id="2P5-gF-FVT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44i-Wc-GFt">
-                                        <rect key="frame" x="296" y="43" width="31" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="保存">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="SaveBtn:" destination="HtL-jR-NJA" eventType="touchUpInside" id="8oS-5P-OkO"/>
-                                            <segue destination="Qxd-wW-WNX" kind="unwind" identifier="unwind_fromCameraVC_save" unwindAction="unwindPrevFor:towards:" id="HbE-El-3lv"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.3432570405" green="0.73496907310000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -167,15 +156,73 @@
                     <connections>
                         <outlet property="BottomBarView" destination="kuy-kD-jl8" id="mze-CN-Oxs"/>
                         <outlet property="CameraPreviewView" destination="cN9-MY-wST" id="Hse-qI-XeI"/>
-                        <outlet property="SaveBtn" destination="44i-Wc-GFt" id="uac-4m-HMo"/>
                         <outlet property="cancelBtn" destination="Jn1-IT-DGW" id="hv9-h3-qXD"/>
                         <outlet property="captureBtn" destination="LUy-RS-fXP" id="WGI-IH-uRr"/>
+                        <segue destination="v5w-ad-szs" kind="presentation" identifier="fromCameraVCtoModal" id="lkc-JZ-lkS"/>
+                        <segue destination="Qxd-wW-WNX" kind="unwind" identifier="unwind_fromCameraVC_save" unwindAction="unwindPrevFor:towards:" id="Noj-AD-f57"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNI-kk-gIB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Qxd-wW-WNX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2915.9420289855075" y="509.59821428571428"/>
+        </scene>
+        <!--Camera ModalVC-->
+        <scene sceneID="gTH-3C-htH">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="v5w-ad-szs" customClass="CameraModalVC" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1YS-Sh-N2Z" customClass="Camera">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yoK-RE-PQq">
+                                <rect key="frame" x="36" y="298" width="343" height="301"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgX-NM-KuT">
+                                        <rect key="frame" x="8" y="263" width="147" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="再撮影">
+                                            <color key="titleShadowColor" red="0.30720253460000002" green="0.72276087649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="5UC-sY-6tt" kind="unwind" identifier="unwind_cancel" unwindAction="unwindPrevFor:towards:" id="vOD-40-GTQ"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1H-YV-fdk">
+                                        <rect key="frame" x="51" y="49" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsg-cZ-XXU">
+                                        <rect key="frame" x="188" y="263" width="147" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleShadowColor" red="0.30720253460000002" green="0.72276087649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="5UC-sY-6tt" kind="unwind" identifier="unwind_save" unwindAction="unwindPrevFor:towards:" id="B15-9z-hl6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.30720253460000002" green="0.72276087649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="XYZ-EU-ahz"/>
+                    </view>
+                    <connections>
+                        <outlet property="baseView" destination="yoK-RE-PQq" id="F4l-az-mWQ"/>
+                        <outlet property="cancelBtn" destination="sgX-NM-KuT" id="eWj-Ln-CyZ"/>
+                        <outlet property="imageView" destination="v1H-YV-fdk" id="7rr-i3-BY3"/>
+                        <outlet property="saveBtn" destination="fsg-cZ-XXU" id="E41-Ov-dLF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vUh-JG-GN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5UC-sY-6tt" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3977" y="510"/>
         </scene>
         <!--Item-->
         <scene sceneID="2aL-tA-5EH">
@@ -205,18 +252,16 @@
                         <viewLayoutGuide key="safeArea" id="9ug-nu-gQl"/>
                     </view>
                     <navigationItem key="navigationItem" title="Deleted" id="ZGV-JK-XTB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="KCG-V2-8qB">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vr4-Re-ya9">
-                                <rect key="frame" x="302" y="1" width="92" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Setting"/>
-                                <connections>
-                                    <segue destination="isX-kx-6Rt" kind="show" id="HHf-zu-30g"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="setting" id="KCG-V2-8qB">
+                            <inset key="largeContentSizeImageInsets" minX="-1" minY="1" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <segue destination="isX-kx-6Rt" kind="show" id="V8H-Ak-ogU"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="SettingBtnItem" destination="KCG-V2-8qB" id="cJg-qQ-x4l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0A-zm-s4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -381,33 +426,26 @@
         <scene sceneID="HI1-IE-iYM">
             <objects>
                 <tabBarController id="1A0-jd-6e5" customClass="MyUITabBarController" customModule="Shopping_Stock_List" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="J3U-sy-6qA"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UwM-xg-TGX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="myTabBar" destination="UwM-xg-TGX" id="dBF-Fv-CFP"/>
                         <segue destination="B1u-Rh-pow" kind="relationship" relationship="viewControllers" id="pJ4-WD-pIz"/>
                         <segue destination="Yfs-hx-Tdq" kind="relationship" relationship="viewControllers" id="cz0-Se-xbS"/>
                         <segue destination="gOf-pR-1YW" kind="relationship" relationship="viewControllers" id="1Jg-OM-T3Q"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VyI-3M-VdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationItem title="Deleted" id="aMR-Xk-Omp">
-                    <barButtonItem key="rightBarButtonItem" style="plain" id="BYn-mF-5pU">
-                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i8f-kg-tv7">
-                            <rect key="frame" x="302" y="1" width="92" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                            <state key="normal" title="Setting"/>
-                        </button>
-                    </barButtonItem>
-                </navigationItem>
             </objects>
             <point key="canvasLocation" x="-2412" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="setting" width="256" height="256"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="yAC-CI-gnL"/>
     </inferredMetricsTieBreakers>

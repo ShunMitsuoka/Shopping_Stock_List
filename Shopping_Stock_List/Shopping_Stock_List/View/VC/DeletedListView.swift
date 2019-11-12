@@ -15,6 +15,10 @@ class DeletedListView: SuperViewController_List {
         super.viewDidLoad()
         self.tableView.allowsSelection = false
         // Do any additional setup after loading the view.
+        
+        let image = UIImage(named: "setting")
+        let reSizeImage = image?.reSizeImage(reSize: naviBarImageSize)
+        SettingBtnItem.image = reSizeImage?.withRenderingMode(.alwaysOriginal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,6 +28,7 @@ class DeletedListView: SuperViewController_List {
     
     var ListArray:[DeletedDataClass] = []
     var ListArray_category:[[DeletedDataClass]] = [[]]
+    @IBOutlet weak var SettingBtnItem: UIBarButtonItem!
     
     //Reload設定
     override func customReloadData(){

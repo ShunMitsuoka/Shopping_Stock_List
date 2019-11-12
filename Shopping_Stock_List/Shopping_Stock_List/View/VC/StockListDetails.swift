@@ -118,6 +118,7 @@ class StockListDetails: SuperVC_StockDetails {
     
     //遷移する際の動作
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if segue.identifier == "unwind_fromStockToDetail"{
             print("データを保存します。")
             let StockVC = segue.destination as! StockListView

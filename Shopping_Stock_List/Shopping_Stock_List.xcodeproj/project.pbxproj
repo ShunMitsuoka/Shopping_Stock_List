@@ -46,6 +46,7 @@
 		B322E70723122C37000436C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B322E70923122C37000436C8 /* Localizable.strings */; };
 		B352F9AC23754E7700942A4C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352F9AB23754E7700942A4C /* SettingViewController.swift */; };
 		B352F9AF23755A9C00942A4C /* Category_setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = B352F9AE23755A9C00942A4C /* Category_setting.swift */; };
+		B3AFFCB4237A98810087A75B /* CameraModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AFFCB3237A98800087A75B /* CameraModalVC.swift */; };
 		B3F5CC2322B6100900EA21B9 /* MyUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5CC2222B6100900EA21B9 /* MyUINavigationController.swift */; };
 		B3F5CC2522B6116600EA21B9 /* MyUITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F5CC2422B6116600EA21B9 /* MyUITabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 		B322E70A23122C42000436C8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B352F9AB23754E7700942A4C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		B352F9AE23755A9C00942A4C /* Category_setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category_setting.swift; sourceTree = "<group>"; };
+		B3AFFCB3237A98800087A75B /* CameraModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModalVC.swift; sourceTree = "<group>"; };
 		B3F5CC2222B6100900EA21B9 /* MyUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUINavigationController.swift; sourceTree = "<group>"; };
 		B3F5CC2422B6116600EA21B9 /* MyUITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUITabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				B3081456235CA47D0023E1A2 /* CameraVC.swift */,
+				B3AFFCB3237A98800087A75B /* CameraModalVC.swift */,
 				B314A37022A8DB2500E565B4 /* ShoppingListView.swift */,
 				B31A609D2309186F002152BD /* StockListView.swift */,
 				B31E403F236048250018C62E /* DeletedListView.swift */,
@@ -400,6 +403,7 @@
 				B31553CE22A61D6C001EC253 /* Data.swift in Sources */,
 				B352F9AC23754E7700942A4C /* SettingViewController.swift in Sources */,
 				B31CDE2623097D62007A2B44 /* ExpDateCell.swift in Sources */,
+				B3AFFCB4237A98810087A75B /* CameraModalVC.swift in Sources */,
 				B322E6FC23121D41000436C8 /* Error_Alert.swift in Sources */,
 				B352F9AF23755A9C00942A4C /* Category_setting.swift in Sources */,
 				B314A37422A8DBD100E565B4 /* ViewProperties.swift in Sources */,

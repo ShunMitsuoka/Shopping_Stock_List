@@ -36,16 +36,6 @@ class SuperViewController_List: SuperViewController {
     }
     
     let tableView = UITableView()
-    var navigationHeight:CGFloat!{
-        get{
-            return self.navigationController?.navigationBar.frame.size.height
-        }
-    }
-    var tabBarHeight:CGFloat!{
-        get{
-            return self.tabBarController?.tabBar.frame.size.height
-        }
-    }
     
     //tableView再描写
     func customReloadData(){

@@ -21,7 +21,7 @@
                         <viewLayoutGuide key="safeArea" id="NKX-Qy-aEl"/>
                     </view>
                     <navigationItem key="navigationItem" title="詳細" id="nz4-xa-F3o">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="s1F-WU-OCC">
+                        <barButtonItem key="rightBarButtonItem" id="s1F-WU-OCC">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xak-Iy-BgS">
                                 <rect key="frame" x="302" y="2.5" width="92" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -54,7 +54,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="q4D-fC-3LU"/>
                     <navigationItem key="navigationItem" title="追加" id="jKT-s2-N81">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Or6-6s-KDa">
+                        <barButtonItem key="rightBarButtonItem" id="Or6-6s-KDa">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xsZ-IR-b70">
                                 <rect key="frame" x="302" y="2.5" width="92" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,7 +86,7 @@
                         <viewLayoutGuide key="safeArea" id="j79-ne-BEu"/>
                     </view>
                     <navigationItem key="navigationItem" title="追加" id="cwH-8G-URv">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="KaY-Ns-Jyc">
+                        <barButtonItem key="rightBarButtonItem" id="KaY-Ns-Jyc">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z5Q-5t-qFD">
                                 <rect key="frame" x="302" y="2.5" width="92" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -179,6 +179,10 @@
                                 <rect key="frame" x="36" y="298" width="343" height="301"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1H-YV-fdk">
+                                        <rect key="frame" x="51" y="49" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgX-NM-KuT">
                                         <rect key="frame" x="8" y="263" width="147" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -187,13 +191,10 @@
                                             <color key="titleShadowColor" red="0.30720253460000002" green="0.72276087649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
+                                            <action selector="RetakeBtnAction:" destination="v5w-ad-szs" eventType="touchUpInside" id="ZvL-iL-8wK"/>
                                             <segue destination="5UC-sY-6tt" kind="unwind" identifier="unwind_cancel" unwindAction="unwindPrevFor:towards:" id="vOD-40-GTQ"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v1H-YV-fdk">
-                                        <rect key="frame" x="51" y="49" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsg-cZ-XXU">
                                         <rect key="frame" x="188" y="263" width="147" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -202,7 +203,7 @@
                                             <color key="titleShadowColor" red="0.30720253460000002" green="0.72276087649999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <segue destination="5UC-sY-6tt" kind="unwind" identifier="unwind_save" unwindAction="unwindPrevFor:towards:" id="B15-9z-hl6"/>
+                                            <action selector="SaveBtnAction:" destination="v5w-ad-szs" eventType="touchUpInside" id="uog-9w-czb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -313,7 +314,7 @@
                         <viewLayoutGuide key="safeArea" id="tpy-I9-dN5"/>
                     </view>
                     <navigationItem key="navigationItem" title="詳細" id="pGJ-OK-tf8">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="lWo-Mj-ehv">
+                        <barButtonItem key="rightBarButtonItem" id="lWo-Mj-ehv">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ewx-iI-uAK">
                                 <rect key="frame" x="302" y="2.5" width="92" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -361,8 +362,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qk7-b7-YId"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Stock" id="hOH-jg-w2x"/>
+                    <navigationItem key="navigationItem" title="Stock" id="hOH-jg-w2x">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="6gZ-V3-4HI">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eSC-1p-pft">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="SORT"/>
+                                <connections>
+                                    <action selector="SortBtnAction:" destination="78g-Fo-UYC" eventType="touchUpInside" id="7zb-BE-iPw"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="sortBtn" destination="eSC-1p-pft" id="ku9-N0-6EL"/>
                         <segue destination="rwg-k5-U8c" kind="show" identifier="fromStockToAdd" id="oxX-1u-zmw"/>
                         <segue destination="lie-yt-LBO" kind="show" identifier="fromStockToDetail" id="3v7-6w-J0z"/>
                     </connections>
@@ -447,6 +460,6 @@
         <image name="setting" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yAC-CI-gnL"/>
+        <segue reference="gzQ-2d-NY4"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,6 +17,8 @@
 "VC100_Name" = "食材名が設定されていません。";
 
 "category_add_error_001" = "既に存在するカテゴリーです。";
+"category_add_error_002" = "カテゴリー名を入力して下さい。";
+
 "category_delete_error_001" = "買い物リストにデータが残っています。";
 "category_delete_error_002" = "ストックリストにデータが残っています。";
 "category_delete_error_003" = "削除リストにデータが残っています。";

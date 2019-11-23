@@ -21,7 +21,7 @@ class NameCell_add: SuperNameCell,UITextFieldDelegate {
         //textField設定
         textField.delegate = self
         
-        textField.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height*0.9)
+        textField.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         textField.placeholder = "食材名"
         textField.font = UIFont.systemFont(ofSize:ViewProperties.mainBoundSize.width*0.6/8 )
         textField.borderStyle = .none

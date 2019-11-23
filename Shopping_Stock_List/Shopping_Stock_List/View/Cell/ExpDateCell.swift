@@ -21,7 +21,7 @@ class ExpDateCell: UITableViewCell,UITextFieldDelegate {
         self.frame = CGRect(x: 0, y: 0, width: ViewProperties.mainBoundSize.width, height: ViewProperties.cellHeight)
         backgroundColor = UIColor(red: 236/255, green: 230/255, blue: 229/255, alpha: 1)
         //textField設定
-        DateField.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height*0.9)
+        DateField.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
         DateField.placeholder = "賞味期限"
         DateField.font = UIFont.systemFont(ofSize:ViewProperties.mainBoundSize.width*0.6/8 )
         DateField.borderStyle = .none

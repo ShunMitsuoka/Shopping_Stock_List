@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "CameraModalVC.SaveBtnAction(_:):CameraModalVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "prepreView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CameraVC.SaveImageToPreView(savedImage:):CameraVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.presentingViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "StockListDetails.tableView(_:cellForRowAt:):StockListDetails.swift">
          <PersistentStrings>
             <PersistentString

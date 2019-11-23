@@ -23,6 +23,10 @@ class StockListView: SuperViewController_List {
         addButton.imageView?.contentMode = .scaleAspectFit
         self.view.addSubview(addButton)
         
+        ///ソートボタン設定
+        let BtnSize:CGSize = CGSize(width: naviBarImageSize.width*1.3, height: naviBarImageSize.height*0.9)
+        self.sortBtn.setImage(UIImage(named: "sort")?.reSizeImage(reSize: BtnSize), for: .normal)
+        self.sortBtn.setTitle(nil, for: .normal)
     }
     
     
@@ -36,6 +40,18 @@ class StockListView: SuperViewController_List {
     var addButton = UIButton(type: .custom)
     var receive_indexPath:IndexPath?
     var receive_data:StockDataClass?
+    
+    
+    @IBOutlet weak var sortBtn: UIButton!
+    ///Listの順番を賞味期限順に並び替え
+    @IBAction func SortBtnAction(_ sender: Any) {
+        self.ListArray.sort(by: {(a,b) -> Bool in
+            guard let a_expDate = a.ExpDate else{return false}
+            guard let b_expDate = b.ExpDate else{return true}
+            return StringToDate(strDate: a_expDate) < StringToDate(strDate: b_expDate) })
+        SaveDataClass.SaveData(inputData: ListArray, KeyName: "StockData")
+        customReloadData()
+    }
     
     //cellの表示設定
     override func CellView(indexpath:IndexPath) -> UIView {
@@ -166,16 +182,5 @@ class StockListView: SuperViewController_List {
         return UISwipeActionsConfiguration(actions: [sendDeletedList_Action,sendShoppingList_Action])
     }
 
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
 }

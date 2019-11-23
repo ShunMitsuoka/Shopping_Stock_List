@@ -20,6 +20,10 @@ class ViewProperties {
     static let backgroundColor:UIColor = UIColor.init(red: 127/255, green: 175/255, blue: 177/255, alpha: 1)
     static let tableViewbackgroundColor = UIColor(red: 230/255, green: 217/255, blue: 205/255, alpha: 1)
 //        UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
+    static let Color_red = UIColor(red: 215/255, green: 66/255, blue: 96/255, alpha: 1)
+    static let Color_yellow = UIColor(red: 225/255, green: 178/255, blue: 59/255, alpha: 1)
+    static let Color_orange = UIColor(red: 245/255, green: 162/255, blue: 0/255, alpha: 1)
+    
     //Cellの色
     static func CellColor(indexpath:Int) -> UIColor?{
         switch indexpath % 2{
@@ -55,7 +59,7 @@ class ViewProperties {
         BottomLine.frame = CGRect(x: 0, y: 26, width: ViewProperties.mainBoundSize.width,height: 2)
         BottomLine.backgroundColor = UIColor(red: 120/255, green: 91/255, blue: 84/255, alpha: 1).cgColor
         headerview.layer.addSublayer(BottomLine)
-        let headerLabel = UILabel(frame: CGRect(x:10, y: -3, width: mainBoundSize.width, height: 30))
+        let headerLabel = UILabel(frame: CGRect(x:10, y: -2, width: mainBoundSize.width, height: 30))
         headerLabel.text = CategoryClass.CategoryArray[section]
         headerLabel.font = UIFont.systemFont(ofSize: 25)
         headerview.addSubview(headerLabel)

@@ -26,7 +26,7 @@ class AmountCell: UITableViewCell {
         self.selectionStyle = .none
         
         //Slider設定
-        amountSlider.frame = CGRect(x: ViewProperties.mainBoundSize.width*0.10, y: ViewProperties.cellHeight - 25, width: ViewProperties.mainBoundSize.width*0.80, height: 30)
+        amountSlider.frame = CGRect(x: ViewProperties.mainBoundSize.width*0.10, y: ViewProperties.cellHeight/3, width: ViewProperties.mainBoundSize.width*0.80, height: 30)
         amountSlider.maximumTrackTintColor = UIColor.clear
         amountSlider.minimumTrackTintColor = UIColor.clear
         amountSlider.thumbTintColor = UIColor.white

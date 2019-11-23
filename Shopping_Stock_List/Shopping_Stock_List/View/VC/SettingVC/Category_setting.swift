@@ -37,6 +37,7 @@ class Category_setting: SuperViewController_List {
         ///削除ボタン設定
         setDeleteBtn()
         self.addCellHeight = cellHeight*1.3
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +57,12 @@ class Category_setting: SuperViewController_List {
     let flowLayout = UICollectionViewFlowLayout()
     ///カテゴリー追加cellの高さ
     var addCellHeight:CGFloat!
+    
+    //    textFieldのdoneボタンの動き
+    @objc func done_Date() {
+        textfield.endEditing(true)
+    }
+    
     ///カテゴリー追加ボタンが押された際のメソッド
     @objc func addButtonEvent(_ sender: UIButton) {
         if let text = self.textfield.text{
@@ -63,10 +70,17 @@ class Category_setting: SuperViewController_List {
                 if shouldAddCategory(category: text){
                     SaveDataClass.add_Category(category: text)
                     CategoryCollectionViewReload()
+                    self.textfield.text = nil
+                }else{
+                    ///カテゴリーが既に存在している。
+                    Error_Alert.ShowAlert(ViewController: self, title: "category_add_error_001".localized, message: nil)
                 }
+                return
             }
-            self.textfield.text = nil
         }
+        ///カテゴリー名が入力されていない。
+        Error_Alert.ShowAlert(ViewController: self, title: "category_add_error_002".localized, message: nil)
+        return
     }
     
     //カテゴリー削除ボタンが押された際のメソッド
@@ -84,25 +98,26 @@ class Category_setting: SuperViewController_List {
     
     ///カテゴリー追加ボタンの設定メソッド
     func setAddBtn() -> UIButton{
-        let addBtn = UIButton(frame: CGRect(x: mainBoundSize.width*0.7, y: 0, width: mainBoundSize.width*0.3, height: addCellHeight))
+        let BtnSize:CGFloat = addCellHeight*0.6
+        let addBtn = UIButton(frame: CGRect(x: mainBoundSize.width*0.8, y: (addCellHeight - BtnSize)/2, width:BtnSize , height:BtnSize ))
         addBtn.addTarget(self, action: #selector(addButtonEvent(_:)), for: UIControl.Event.touchUpInside)
-        addBtn.setTitle("add".localized, for: .normal )
-        addBtn.backgroundColor = UIColor.black
+        addBtn.setImage(UIImage(named: "add_btn"), for: .normal)
+        addBtn.imageView?.contentMode = .scaleAspectFit
         return addBtn
     }
     
     ///カテゴリー削除ボタンの設定メソッド
     func setDeleteBtn(){
         ///削除ボタンの設定
-        let width:CGFloat = mainBoundSize.width*0.2
+        ///削除ボタンレイアウト
+        let width:CGFloat = mainBoundSize.width*0.3
         let height:CGFloat = cellHeight
         let x:CGFloat = (mainBoundSize.width - width )/2
         let y:CGFloat = self.mainBoundSize.height - tabBarHeight - height*2
         let deleteBtn = UIButton(frame: CGRect(x: x, y: y, width: width, height: height))
         deleteBtn.addTarget(self, action: #selector(deleteButtonEvent(_:)), for: UIControl.Event.touchUpInside)
-        deleteBtn.setTitle("delete".localized, for: .normal )
-        deleteBtn.backgroundColor = UIColor.red
-        ///削除ボタンレイアウト
+        let deleteBtnImage = UIImage(named: "delete")?.reSizeImage(reSize: CGSize(width: width, height: height))
+        deleteBtn.setImage(deleteBtnImage, for: .normal)
         self.view.addSubview(deleteBtn)
     }
     
@@ -122,6 +137,13 @@ class Category_setting: SuperViewController_List {
             textfield = UITextField(frame: CGRect(x: 0, y: 0, width: mainBoundSize.width*0.7, height: addCellHeight))
             textfield.placeholder = "追加カテゴリー"
             textfield.textAlignment = NSTextAlignment.center
+            //完了ボタンの作成
+            let toolbar_Done = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+            let spacelItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+            let doneItem_Date = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done_Date))
+            toolbar_Done.setItems([spacelItem, doneItem_Date], animated: true)
+            textfield.inputAccessoryView = toolbar_Done
+            
             cellView.addSubview(textfield)
             cellView.addSubview(setAddBtn())
         }else if indexpath.section == 1{

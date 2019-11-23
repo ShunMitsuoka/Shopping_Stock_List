@@ -99,7 +99,8 @@ class SuperViewController_List: SuperViewController {
             dateLabel.text = date
             dateLabel.textColor = UIColor.black
             dateLabel.textAlignment = NSTextAlignment.center
-            dateLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/8 )
+            dateLabel.font = UIFont.boldSystemFont(ofSize: mainBoundSize.width*0.5/8 )
+            dateLabel.textColor = setLabelColor(strDate: date)
             cellView.addSubview(dateLabel)
         }
         
@@ -122,6 +123,52 @@ class SuperViewController_List: SuperViewController {
         cellView.addSubview(coverView)
         return cellView
     }
+    
+    
+    ///賞味期限によってラベルの色を変更。
+    func setLabelColor(strDate:String) -> UIColor {
+        let expDate:Date = self.StringToDate(strDate: strDate)
+        if compareDate(date: expDate, afterDay: 0){
+            return ViewProperties.Color_red
+        }else if compareDate(date: expDate, afterDay: 7){
+            return ViewProperties.Color_orange
+        }else{
+            return UIColor.black
+        }
+    }
+    
+    ///文字列をdate型に変換
+    func StringToDate(strDate:String) -> Date{
+        print(strDate)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        dateFormatter.timeZone = NSTimeZone.local
+        return dateFormatter.date(from: strDate)!
+    }
+    
+    //入力された日付とセットされた日付の前後を比較する。
+    //入力された日付がセットされた日付より前だとtrue。
+    func compareDate(date:Date,afterDay:Double) -> Bool{
+        let Today = Date()
+        let setDate = Today + 60*60*24*afterDay
+        let calender = Calendar(identifier: .gregorian)
+        let date_omit = roundDate(date: date, cal: calender)
+        let setDate_omit = roundDate(date: setDate, cal: calender)
+        if date_omit < setDate_omit{
+            return true
+        }
+        return false
+    }
+    //Date型を年月日までで表す
+    func roundDate(date:Date,cal: Calendar) -> Date{
+        let _year = cal.component(.year, from: date)
+        let _month = cal.component(.month, from: date)
+        let _day = cal.component(.day, from: date)
+        return cal.date(from: DateComponents(year:_year,month:_month,day:_day))!
+    }
+    
     
     ///Setting画面
     ///Cellの内容表示

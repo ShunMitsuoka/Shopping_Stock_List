@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 class CameraVC: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,7 +237,7 @@ class CameraVC: UIViewController {
     @IBAction func unwindPrev(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
         switch unwindSegue.identifier {
         case "unwind_save":
-            performSegue(withIdentifier: "unwind_fromCameraVC_save", sender: nil)
+            return
         case "unwind_cancel":
             for subview in self.CameraPreviewView.subviews{
                 subview.removeFromSuperview()
@@ -245,6 +246,12 @@ class CameraVC: UIViewController {
         default:
             fatalError()
         }
+    }
+    
+    ///CameraModalVCでSaveBtnが押された際の動作
+    func SaveImageToPreView(savedImage:UIImage){
+        self.capturedImage = savedImage
+        self.performSegue(withIdentifier: "unwind_fromCameraVC_save", sender: nil)
     }
 
 }

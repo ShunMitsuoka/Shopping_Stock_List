@@ -15,6 +15,7 @@ class MyUINavigationController: UINavigationController {
 
         // Do any additional setup after loading the view.
         navigationBar.barTintColor = ViewProperties.backgroundColor
+        navigationBar.tintColor = UIColor.black
     }
     
     func navigationHeight() -> CGFloat{

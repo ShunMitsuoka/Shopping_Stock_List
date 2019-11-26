@@ -364,7 +364,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Stock" id="hOH-jg-w2x">
                         <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="6gZ-V3-4HI">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eSC-1p-pft">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eSC-1p-pft">
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="SORT"/>

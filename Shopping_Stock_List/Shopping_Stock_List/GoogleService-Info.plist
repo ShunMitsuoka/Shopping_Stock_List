@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>338111445462-8jpketsvuaec9bonfi2pb90gj019dgau.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.338111445462-8jpketsvuaec9bonfi2pb90gj019dgau</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAm2PRf5cvv6UD3lctpvHkTMoYk3vS_2gU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>338111445462</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>physics.sm0414-gmail.com.Shopping-Stock-List</string>
+	<key>PROJECT_ID</key>
+	<string>shopping-stock-list</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shopping-stock-list.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:338111445462:ios:b99ccc893c4a46709d0c77</string>
+	<key>DATABASE_URL</key>
+	<string>https://shopping-stock-list.firebaseio.com</string>
+</dict>
+</plist>

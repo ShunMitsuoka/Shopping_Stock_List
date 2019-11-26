@@ -22,6 +22,7 @@ class DeletedListView: SuperViewController_List {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print("DeletedList画面が再表示されました。")
         self.customReloadData()
     }

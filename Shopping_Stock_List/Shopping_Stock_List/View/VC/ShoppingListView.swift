@@ -18,7 +18,7 @@ class ShoppingListView: SuperViewController_List {
         
         // Do any additional setup after loading the view.
         addButton.frame = CGRect(x: 0,y: 0 , width: 50, height: 50)
-        addButton.layer.position = CGPoint(x: ViewProperties.mainBoundSize.width - 50, y: ViewProperties.mainBoundSize.height - tabBarHeight - 40)
+        addButton.layer.position = CGPoint(x: ViewProperties.mainBoundSize.width - 50, y: ViewProperties.mainBoundSize.height - tabBarHeight - 90)
         addButton.addTarget(self, action: #selector(buttonEvent(_:)), for: UIControl.Event.touchUpInside)
         addButton.setImage(UIImage(named: "add_btn"), for: .normal)
         addButton.imageView?.contentMode = .scaleAspectFit
@@ -27,6 +27,7 @@ class ShoppingListView: SuperViewController_List {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         print("ShoppingList画面が再表示されました。")
         self.customReloadData()
     }

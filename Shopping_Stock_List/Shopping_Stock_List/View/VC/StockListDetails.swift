@@ -56,7 +56,7 @@ class StockListDetails: SuperVC_StockDetails {
                     self.numberCell?.NumberField.text = nil
                     return self.numberCell!
                 }else{
-                    self.numberCell?.NumberField.text = String(receiveData.Number!)
+                    self.numberCell?.NumberField.text = String(Int(receiveData.Number!))
                     return self.numberCell!
                 }
                 

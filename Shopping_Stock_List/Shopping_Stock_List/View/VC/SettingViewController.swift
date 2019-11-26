@@ -34,6 +34,10 @@ class SettingViewController: SuperViewController_List {
         return ViewProperties.SettingheaderView(section: section)
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ViewProperties.settingHeaderHeight
+    }
+    
     //cell選択時segue
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {

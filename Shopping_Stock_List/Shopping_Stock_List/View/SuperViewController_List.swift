@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class SuperViewController_List: SuperViewController {
+    
+    var bannerView: GADBannerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +36,25 @@ class SuperViewController_List: SuperViewController {
         
         //再描写
         tableView.reloadData()
+        
+        
+        // In this case, we instantiate the banner with desired ad size.
+        bannerView = GADBannerView()
+        bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: mainBoundSize.width, height: 50))
+        bannerView.layer.position.x = mainBoundSize.width/2
+        bannerView.layer.position.y = mainBoundSize.height - tabBarHeight - 25
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        let gadRequest:GADRequest = GADRequest()
+        // テスト用の広告を表示する時のみ使用（申請時に削除）
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "b5c1d38b2d24e4615e2c84cee0b286f8" ];
+        bannerView.load(gadRequest)
+        self.view.addSubview(bannerView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: mainBoundSize.width, height: 50))
     }
     
     let tableView = UITableView()
@@ -73,7 +95,7 @@ class SuperViewController_List: SuperViewController {
         if let number_ = number{
             if number_ != -9999{
                 let numberLabel = UILabel(frame: CGRect(x: mainBoundSize.width*0.5, y: 0, width: mainBoundSize.width*0.5, height: cellHeight))
-                numberLabel.text = String(number_)
+                numberLabel.text = String(Int(number_))
                 numberLabel.textColor = UIColor.black
                 numberLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/6)
                 numberLabel.textAlignment = NSTextAlignment.center
@@ -139,7 +161,6 @@ class SuperViewController_List: SuperViewController {
     
     ///文字列をdate型に変換
     func StringToDate(strDate:String) -> Date{
-        print(strDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .none
@@ -300,8 +321,13 @@ extension SuperViewController_List:UITableViewDataSource{
 }
 
 extension SuperViewController_List:UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return ViewProperties.headerView(section: section)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ViewProperties.headerHeight
     }
     
 }

@@ -38,7 +38,6 @@ class ViewProperties {
     
     
     //tableview
-    
     //cell size
     static var cellHeight:CGFloat {
         get{
@@ -47,19 +46,21 @@ class ViewProperties {
         }
     }
     static var imageCellHeight:CGFloat = ViewProperties.cellHeight*3
-    
+    static let headerHeight:CGFloat = 30
+    static let settingHeaderHeight:CGFloat = 40
     //内容表示
     
     //header情報
     static func headerView(section:Int) -> UIView{
         let headerview = UIView()
-        headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: 30 )
+        headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: headerHeight )
         headerview.backgroundColor = UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
+        let lineHeight:CGFloat = 2
         let BottomLine = CALayer()
-        BottomLine.frame = CGRect(x: 0, y: 26, width: ViewProperties.mainBoundSize.width,height: 2)
+        BottomLine.frame = CGRect(x: 0, y: headerHeight - lineHeight, width: ViewProperties.mainBoundSize.width,height:lineHeight )
         BottomLine.backgroundColor = UIColor(red: 120/255, green: 91/255, blue: 84/255, alpha: 1).cgColor
         headerview.layer.addSublayer(BottomLine)
-        let headerLabel = UILabel(frame: CGRect(x:10, y: -2, width: mainBoundSize.width, height: 30))
+        let headerLabel = UILabel(frame: CGRect(x:10, y: 0, width: mainBoundSize.width, height: headerHeight))
         headerLabel.text = CategoryClass.CategoryArray[section]
         headerLabel.font = UIFont.systemFont(ofSize: 25)
         headerview.addSubview(headerLabel)
@@ -69,13 +70,14 @@ class ViewProperties {
     ///setting画面のheader
     static func SettingheaderView(section:Int) -> UIView{
         let headerview = UIView()
-        headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: 40 )
+        headerview.frame.size = CGSize(width: ViewProperties.mainBoundSize.width, height: settingHeaderHeight )
         headerview.backgroundColor = UIColor(red: 189/255, green: 140/255, blue: 102/255, alpha: 1)
+        let lineHeight:CGFloat = 2
         let BottomLine = CALayer()
-        BottomLine.frame = CGRect(x: 0, y: 28, width: ViewProperties.mainBoundSize.width,height: 2)
+        BottomLine.frame = CGRect(x: 0, y: settingHeaderHeight - lineHeight, width: ViewProperties.mainBoundSize.width,height: lineHeight)
         BottomLine.backgroundColor = UIColor(red: 120/255, green: 91/255, blue: 84/255, alpha: 1).cgColor
         headerview.layer.addSublayer(BottomLine)
-        let headerLabel = UILabel(frame: CGRect(x:10, y: -3, width: mainBoundSize.width, height: 40))
+        let headerLabel = UILabel(frame: CGRect(x:10, y: 0, width: mainBoundSize.width, height: settingHeaderHeight))
         switch section {
         case 0:
             headerLabel.text = "カテゴリー"

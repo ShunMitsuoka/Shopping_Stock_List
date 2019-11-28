@@ -31,19 +31,25 @@ class MyUITabBarController: UITabBarController {
         let imageSize = CGSize(width: self.tabBar.bounds.height*0.5, height: self.tabBar.bounds.height*0.5)
         
         let myTabBarItem1 = (myTabBar!.items?[0])! as UITabBarItem
-        let image_item1 = UIImage(named: "shopping")?.reSizeImage(reSize: imageSize)
+        let image_item1 = UIImage(named: "shopping_deselected")?.reSizeImage(reSize: imageSize)
+        let image_item1_selected = UIImage(named: "shopping")?.reSizeImage(reSize: imageSize)
         myTabBarItem1.image = image_item1?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        myTabBarItem1.selectedImage = image_item1_selected?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem1.title = "shoppingList".localized
 //        myTabBarItem1.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         
         let myTabBarItem2 = (myTabBar!.items?[1])! as UITabBarItem
-        let image_item2 = UIImage(named: "stock")?.reSizeImage(reSize: imageSize)
+        let image_item2 = UIImage(named: "stock_deselected")?.reSizeImage(reSize: imageSize)
+        let image_item2_selected = UIImage(named: "stock")?.reSizeImage(reSize: imageSize)
         myTabBarItem2.image = image_item2?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        myTabBarItem2.selectedImage = image_item2_selected?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem2.title = "stockList".localized
         
         let myTabBarItem3 = (myTabBar!.items?[2])! as UITabBarItem
-        let image_item3 = UIImage(named: "trash")?.reSizeImage(reSize: imageSize)
+        let image_item3 = UIImage(named: "trash_deselected")?.reSizeImage(reSize: imageSize)
+        let image_item3_selected = UIImage(named: "trash")?.reSizeImage(reSize: imageSize)
         myTabBarItem3.image = image_item3?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
+        myTabBarItem3.selectedImage = image_item3_selected?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         myTabBarItem3.title = "deletedList".localized
     }
 

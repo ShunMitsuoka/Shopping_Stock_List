@@ -37,12 +37,21 @@ class SuperViewController_List: SuperViewController {
         //再描写
         tableView.reloadData()
         
+    }
+    
+    func setBannerView(){
+        let bannerHeight:CGFloat = 60
+        let tableWidth = mainBoundSize.width
+        let tableHeight = mainBoundSize.height - navigationHeight - tabBarHeight - bannerHeight
+        self.tableView.frame = CGRect(x: 0, y: navigationHeight, width: tableWidth, height: tableHeight)
         
-        // In this case, we instantiate the banner with desired ad size.
+        let adsize = kGADAdSizeBanner
+        print(mainBoundSize.width)
         bannerView = GADBannerView()
-        bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: mainBoundSize.width, height: 50))
+        bannerView.adSize = adsize
+        bannerView.frame = CGRect(x: 0, y: 0, width: mainBoundSize.width, height: bannerHeight)
         bannerView.layer.position.x = mainBoundSize.width/2
-        bannerView.layer.position.y = mainBoundSize.height - tabBarHeight - 25
+        bannerView.layer.position.y = navigationHeight + tableView.frame.height + bannerHeight/2
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         let gadRequest:GADRequest = GADRequest()
@@ -50,11 +59,12 @@ class SuperViewController_List: SuperViewController {
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "b5c1d38b2d24e4615e2c84cee0b286f8" ];
         bannerView.load(gadRequest)
         self.view.addSubview(bannerView)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bannerView.adSize = GADAdSizeFromCGSize(CGSize(width: mainBoundSize.width, height: 50))
     }
     
     let tableView = UITableView()
@@ -209,7 +219,7 @@ class SuperViewController_List: SuperViewController {
             nameLabel.text = ""
         }
         nameLabel.textColor = UIColor.black
-        nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/8)
+        nameLabel.font = UIFont.systemFont(ofSize: mainBoundSize.width*0.5/9)
         nameLabel.textAlignment = NSTextAlignment.center
         cellView.addSubview(nameLabel)
         return cellView

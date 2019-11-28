@@ -24,6 +24,9 @@ class ShoppingListView: SuperViewController_List {
         addButton.imageView?.contentMode = .scaleAspectFit
         
         self.view.addSubview(addButton)
+        
+        ///広告バナー追加
+        setBannerView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +75,7 @@ class ShoppingListView: SuperViewController_List {
         tableView.deleteRows(at: [indexpath], with: .bottom)
         ListArray = Array_order_return(Array: ListArray_category) as! [ShoppingDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "ShoppingData")
+        self.customReloadData()
     }
     
     //cell選択時segue

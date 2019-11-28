@@ -27,6 +27,9 @@ class StockListView: SuperViewController_List {
         let BtnSize:CGSize = CGSize(width: naviBarImageSize.width*1.3, height: naviBarImageSize.height*0.9)
         self.sortBtn.setImage(UIImage(named: "sort")?.reSizeImage(reSize: BtnSize), for: .normal)
         self.sortBtn.setTitle(nil, for: .normal)
+        
+        ///広告バナー追加
+        setBannerView()
     }
     
     
@@ -73,6 +76,7 @@ class StockListView: SuperViewController_List {
         tableView.deleteRows(at: [indexpath], with: .bottom)
         ListArray = Array_order_return(Array: ListArray_category) as! [StockDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "StockData")
+        self.customReloadData()
     }
     
 //    //データの整理

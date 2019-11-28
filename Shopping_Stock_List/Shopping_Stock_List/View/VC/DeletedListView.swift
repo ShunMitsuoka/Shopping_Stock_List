@@ -19,6 +19,9 @@ class DeletedListView: SuperViewController_List {
         let image = UIImage(named: "setting")
         let reSizeImage = image?.reSizeImage(reSize: naviBarImageSize)
         SettingBtnItem.image = reSizeImage?.withRenderingMode(.alwaysOriginal)
+        
+        ///広告バナー追加
+        setBannerView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +62,7 @@ class DeletedListView: SuperViewController_List {
         tableView.deleteRows(at: [indexpath], with: .bottom)
         ListArray = Array_order_return(Array: ListArray_category) as! [DeletedDataClass]
         SaveDataClass.SaveData(inputData: ListArray, KeyName: "DeletedData")
+        self.customReloadData()
     }
     
     ///swipe

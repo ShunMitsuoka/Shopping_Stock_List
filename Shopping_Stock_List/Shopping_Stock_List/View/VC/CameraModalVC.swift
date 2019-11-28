@@ -28,7 +28,8 @@ class CameraModalVC: UIViewController  {
         guard let preView = self.presentingViewController as? CameraVC else { return }
         dismiss(animated: false, completion: nil)
         if let image = self.shownImage{
-            preView.SaveImageToPreView(savedImage: image)
+            let compressedImage = comressionImage(image: image)
+            preView.SaveImageToPreView(savedImage: compressedImage)
         }
     }
     
@@ -90,6 +91,59 @@ class CameraModalVC: UIViewController  {
             saveBtn.tintColor = UIColor.black
             cancelBtn.tintColor = UIColor.black
         }
+    }
+    
+    ///画像を設定した容量まで下げる。
+    func comressionImage(image:UIImage) -> UIImage{
+        let goalSize:Double = 100
+        var resizeImage = image
+        
+        ///画像サイズを横200pixに
+        let width200px:CGFloat = 300
+        let ratio = width200px/image.size.width
+        let height200px = image.size.height*ratio
+        resizeImage = resizeImage.reSizeImage(reSize: CGSize(width: width200px, height: height200px))
+        
+        
+        while resizeImage.fileSize() > goalSize {
+            let preFileSize = resizeImage.fileSize()
+            print("圧縮中\(resizeImage.fileSize())")
+            print("圧縮中size\(resizeImage.size)")
+            let imageWidth = resizeImage.size.width
+            let imageHeight = resizeImage.size.height
+            var jpegData = resizeImage.jpegData(compressionQuality: 1)!
+            if resizeImage.fileSize() > 1000{
+                print("1000")
+                jpegData = resizeImage.jpegData(compressionQuality: 0.1)!
+            }else if resizeImage.fileSize() > 500{
+                print("500")
+                jpegData = resizeImage.jpegData(compressionQuality: 0.2)!
+            }else if resizeImage.fileSize() > 200{
+                print("200")
+                jpegData = resizeImage.jpegData(compressionQuality: 0.1)!
+            }else if resizeImage.fileSize() > 100{
+                print("100")
+                jpegData = resizeImage.jpegData(compressionQuality: 0.9)!
+            }else{
+                jpegData = resizeImage.jpegData(compressionQuality: 1)!
+            }
+            resizeImage = UIImage(data: jpegData)!
+            print("圧縮後\(resizeImage.fileSize())")
+
+            let resizedFileSize = resizeImage.fileSize()
+            if resizedFileSize > goalSize{
+                let difFileSize = preFileSize - resizedFileSize
+                if difFileSize < preFileSize*0.8{
+                    let size = (imageWidth,imageHeight)
+                    print(size)
+                    resizeImage = resizeImage.reSizeImage(reSize: CGSize(width: size.0*0.5, height: size.1*0.5))
+                    print("resize後\(resizeImage.fileSize())")
+                    print("resize後size\(resizeImage.size)")
+                }
+            }
+        }
+        print("圧縮された結果\(resizeImage.fileSize())")
+        return resizeImage
     }
     
 }

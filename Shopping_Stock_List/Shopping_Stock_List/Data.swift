@@ -73,7 +73,7 @@ class DeletedDataClass : Codable {
         try container.encode(Category, forKey: .Category)
         try container.encode(Number, forKey: .Number)
         ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
-        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        let imageDataBase64String = Image?.jpegData(compressionQuality: 0.1)?.base64EncodedString()
         try container.encode(imageDataBase64String, forKey: .Image)
     }
     
@@ -126,7 +126,7 @@ class ShoppingDataClass : DeletedDataClass {
         try container.encode(Category, forKey: .Category)
         try container.encode(Number, forKey: .Number)
         ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
-        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        let imageDataBase64String = Image?.jpegData(compressionQuality: 0.1)?.base64EncodedString()
         try container.encode(imageDataBase64String, forKey: .Image)
         try container.encode(self.Memo, forKey: .Memo)
     }
@@ -188,7 +188,7 @@ class StockDataClass : ShoppingDataClass{
         try container.encode(Category, forKey: .Category)
         try container.encode(Number, forKey: .Number)
         ///imageDataBase64Stringは変換時に何かしらがnilだったらnil
-        let imageDataBase64String = Image?.pngData()?.base64EncodedString()
+        let imageDataBase64String = Image?.jpegData(compressionQuality: 0.1)?.base64EncodedString()
         try container.encode(imageDataBase64String, forKey: .Image)
         try container.encode(self.Memo, forKey: .Memo)
         try container.encode(self.ExpDate, forKey: .ExpDate)

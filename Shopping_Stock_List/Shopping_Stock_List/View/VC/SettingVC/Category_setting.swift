@@ -38,6 +38,8 @@ class Category_setting: SuperViewController_List {
         setDeleteBtn()
         self.addCellHeight = cellHeight*1.3
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

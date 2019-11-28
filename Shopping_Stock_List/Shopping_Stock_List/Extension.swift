@@ -28,4 +28,12 @@ extension UIImage {
     }
 }
 
+extension UIImage {
+    func fileSize() -> Double{
+        let imgData: NSData = NSData(data: self.jpegData(compressionQuality:1)!)
+        let imageSize: Int = imgData.count
+        return Double(imageSize) / 1000.0
+    }
+}
+
 

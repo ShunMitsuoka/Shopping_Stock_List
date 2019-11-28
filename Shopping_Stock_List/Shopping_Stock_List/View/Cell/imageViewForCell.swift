@@ -14,9 +14,10 @@ UINavigationControllerDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.frame = CGRect(x: ViewProperties.mainBoundSize.width*0.6, y: 0, width: ViewProperties.mainBoundSize.width*0.4, height: ViewProperties.imageCellHeight)
-        self.backgroundColor = UIColor.white
+//        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor.red
         imageView.frame = self.frame
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.layer.position = CGPoint(x: self.bounds.width/2, y: self.bounds.height/2)
         self.addSubview(imageView)
     }
@@ -62,6 +63,7 @@ UINavigationControllerDelegate {
     func setImageOnSelf(image:UIImage){
         imageView.image = image
         self.image = image
+        print("セットされた画像容量\(image.fileSize())")
     }
 
 }

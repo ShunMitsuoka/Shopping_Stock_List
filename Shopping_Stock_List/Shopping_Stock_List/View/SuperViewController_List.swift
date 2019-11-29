@@ -52,11 +52,13 @@ class SuperViewController_List: SuperViewController {
         bannerView.frame = CGRect(x: 0, y: 0, width: mainBoundSize.width, height: bannerHeight)
         bannerView.layer.position.x = mainBoundSize.width/2
         bannerView.layer.position.y = navigationHeight + tableView.frame.height + bannerHeight/2
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+//        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"   ///テスト用
+        bannerView.adUnitID = "ca-app-pub-6306542165567187~1601305173"   ///配信用
         bannerView.rootViewController = self
         let gadRequest:GADRequest = GADRequest()
         // テスト用の広告を表示する時のみ使用（申請時に削除）
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "b5c1d38b2d24e4615e2c84cee0b286f8" ];
+//        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "b5c1d38b2d24e4615e2c84cee0b286f8" ];
+        
         bannerView.load(gadRequest)
         self.view.addSubview(bannerView)
         
